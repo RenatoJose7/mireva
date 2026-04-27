@@ -68,41 +68,57 @@ const showSolutionCards = () => {
 
 window.addEventListener("scroll", showSolutionCards);
 window.addEventListener("load", showSolutionCards);
-
 const counters = document.querySelectorAll(".counter");
 
 const animateCounter = (counter) => {
-  const target = Number(counter.dataset.target);
-  let current = 0;
-  const duration = 1400;
-  const stepTime = 16;
-  const increment = target / (duration / stepTime);
+  const target = +counter.getAttribute("data-target");
+  let start = 0;
 
-  const update = () => {
-    current += increment;
+  const duration = 1200;
+  const startTime = performance.now();
 
-    if (current < target) {
-      counter.textContent = Math.floor(current);
+  const update = (currentTime) => {
+    const elapsed = currentTime - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+
+    const value = Math.floor(progress * target);
+    counter.textContent = value;
+
+    if (progress < 1) {
       requestAnimationFrame(update);
     } else {
       counter.textContent = target;
     }
   };
 
-  update();
+  requestAnimationFrame(update);
 };
 
-const counterObserver = new IntersectionObserver((entries) => {
+const observer = new IntersectionObserver((entries) => {
   entries.forEach((entry) => {
-    if (entry.isIntersecting && !entry.target.dataset.animated) {
-      entry.target.dataset.animated = "true";
+    if (entry.isIntersecting && !entry.target.classList.contains("animated")) {
+      entry.target.classList.add("animated");
       animateCounter(entry.target);
     }
   });
 }, {
-  threshold: 0.4
+  threshold: 0.5
 });
 
-counters.forEach((counter) => {
-  counterObserver.observe(counter);
-});
+counters.forEach(counter => observer.observe(counter));
+
+// Animações genéricas sem quebrar as antigas
+const revealItems = document.querySelectorAll(".reveal");
+
+function handleRevealItems() {
+  revealItems.forEach((item) => {
+    const itemTop = item.getBoundingClientRect().top;
+
+    if (itemTop < window.innerHeight - 100) {
+      item.classList.add("show");
+    }
+  });
+}
+
+window.addEventListener("scroll", handleRevealItems);
+window.addEventListener("load", handleRevealItems);

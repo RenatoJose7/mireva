@@ -1463,7 +1463,7 @@ h1,
 .impact-container {
   position: relative;
   max-width: 1000px;
-  min-height: 330px;
+  min-height: 380px;
   margin: 0 auto;
 
   border: 1px solid #fff0c2;
@@ -1477,11 +1477,11 @@ h1,
 .impact-image {
   position: absolute;
   left: 80px;
-  top: -45px;
+  top: -100px;
 }
 
 .impact-image img {
-  width: 210px;
+  width: 300px;
   transform: rotate(-7deg);
   filter: drop-shadow(0 25px 35px rgba(0,0,0,0.45));
 }
@@ -1584,4 +1584,53 @@ h1,
     bottom: auto;
     margin-top: 35px;
   }
+}
+/* =========================
+   BASE ANIMAÇÃO
+========================= */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  filter: blur(6px);
+  transition:
+    opacity 0.8s ease,
+    transform 0.8s ease,
+    filter 0.8s ease;
+}
+
+.reveal.show {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
+/* delay */
+.reveal.delay-1 { transition-delay: 0.15s; }
+.reveal.delay-2 { transition-delay: 0.3s; }
+.reveal.delay-3 { transition-delay: 0.45s; }
+.reveal.delay-4 { transition-delay: 0.6s; }
+
+/* =========================
+   ANIMAÇÃO DO TABLET
+========================= */
+.impact-image img {
+  animation: floatTablet 4s ease-in-out infinite;
+}
+
+@keyframes floatTablet {
+  0%, 100% {
+    transform: rotate(-7deg) translateY(0);
+  }
+  50% {
+    transform: rotate(-7deg) translateY(-12px);
+  }
+}
+
+/* quando entra na tela (efeito inicial) */
+.impact-image.reveal {
+  transform: translateY(60px) scale(0.95);
+}
+
+.impact-image.reveal.show {
+  transform: translateY(0) scale(1);
 }
