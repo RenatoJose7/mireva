@@ -1634,3 +1634,10 @@ h1,
 .impact-image.reveal.show {
   transform: translateY(0) scale(1);
 }
+.impact-stats .stat-item {
+  transition-delay: 0s !important;
+}
+
+.counter {
+  transition-delay: 0s !important;
+}

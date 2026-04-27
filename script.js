@@ -74,7 +74,7 @@ const animateCounter = (counter) => {
   const target = +counter.getAttribute("data-target");
   let start = 0;
 
-  const duration = 1200;
+  const duration = 2200;
   const startTime = performance.now();
 
   const update = (currentTime) => {
