@@ -181,12 +181,22 @@ h1,
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 70px 110px 80px;
-  gap: 60px;
+   max-width: 1200px;
+  margin: 0 auto;
+  padding: 70px 60px 80px;
+  gap: 70px;
+  
 }
 
-.hero-content {
-  max-width: 620px;
+.hero-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 60px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
 }
 
 .hero-title {
@@ -253,7 +263,7 @@ h1,
   align-items: center;
   gap: 12px;
 }
-
+  
 /* =========================
    IMAGEM DO NOTEBOOK
 ========================= */
@@ -290,6 +300,7 @@ h1,
   width: min(520px, 110%);
   filter: drop-shadow(0 45px 60px rgba(0, 0, 0, 0.5));
   animation: laptopFloat 3.5s ease-in-out infinite;
+
 }
 
 /* =========================
@@ -985,4 +996,192 @@ h1,
   width: 360px;
   transform: rotate(-2deg);
   filter: drop-shadow(0 35px 35px rgba(28, 20, 69, 0.35));
+}
+/* =========================
+   CORREÇÃO STRATEGY SECTION
+========================= */
+
+.strategy-section {
+  position: relative;
+  overflow: hidden;
+  padding: 55px 68px 60px;
+}
+
+.strategy-content,
+.cards-carousel {
+  max-width: 960px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.strategy-content {
+  height: auto;
+  min-height: 210px;
+  margin-bottom: 30px;
+  align-items: flex-start;
+}
+
+.strategy-text {
+  max-width: 520px;
+}
+
+.strategy-text h2 {
+  max-width: 520px;
+  font-size: clamp(30px, 3vw, 42px);
+  line-height: 1.1;
+  margin-bottom: 12px;
+}
+
+.strategy-text p {
+  max-width: 520px;
+  font-size: 15px;
+  line-height: 1.05;
+  font-weight: 400;
+}
+
+/* notebook no desktop */
+.floating-notebook {
+  position: absolute;
+  right: 7%;
+  
+  z-index: 2;
+  pointer-events: none;
+}
+
+.floating-notebook img {
+  width: 340px;
+  margin-top: 80px;
+  transform: rotate(-2deg);
+  filter: drop-shadow(0 35px 35px rgba(28, 20, 69, 0.35));
+}
+
+/* carrossel */
+.cards-track {
+  margin-top: 0;
+  gap: 18px;
+  padding: 10px 4px 22px;
+}
+
+.strategy-card {
+  flex: 0 0 178px;
+  min-height: 175px;
+  padding: 20px 14px;
+}
+
+.strategy-card i {
+  font-size: 48px;
+  margin-bottom: 14px;
+}
+
+.strategy-card h3 {
+  font-size: 15px;
+  line-height: 0.95;
+}
+
+.strategy-card p {
+  font-size: 10px;
+  line-height: 1.05;
+}
+
+/* =========================
+   RESPONSIVO
+========================= */
+
+@media (max-width: 1024px) {
+  .strategy-section {
+    padding: 60px 35px;
+  }
+
+  .floating-notebook {
+    top: -25px;
+    right: 3%;
+  }
+
+  .floating-notebook img {
+    width: 280px;
+  }
+
+  .strategy-content,
+  .cards-carousel {
+    max-width: 760px;
+  }
+}
+
+@media (max-width: 768px) {
+  .strategy-section {
+    padding: 45px 20px 55px;
+  }
+
+  .strategy-content {
+    text-align: left;
+    align-items: flex-start;
+    min-height: auto;
+    padding-top: 190px;
+  }
+
+  .strategy-text h2,
+  .strategy-text p {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .floating-notebook {
+    top: 20px;
+    right: -30px;
+  }
+
+  .floating-notebook img {
+    width: 260px;
+  }
+
+  .cards-carousel {
+    max-width: 100%;
+  }
+
+  .cards-track {
+    gap: 16px;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+  .strategy-card {
+    flex: 0 0 175px;
+    min-height: 190px;
+  }
+
+  .carousel-btn.prev {
+    left: 4px;
+  }
+
+  .carousel-btn.next {
+    right: 4px;
+  }
+}
+
+@media (max-width: 480px) {
+  .strategy-content {
+    padding-top: 170px;
+  }
+
+  .floating-notebook {
+    top: 15px;
+    right: -75px;
+  }
+
+  .floating-notebook img {
+    width: 250px;
+  }
+
+  .strategy-text h2 {
+    font-size: 28px;
+    line-height: 0.95;
+  }
+
+  .strategy-text p {
+    font-size: 13px;
+    line-height: 1.05;
+  }
+}
+.strategy-image img {
+  transform: rotate(-2deg) translateY(-45px)
 }
