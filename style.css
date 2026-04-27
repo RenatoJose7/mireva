@@ -1551,7 +1551,6 @@ h1,
   }
 
   .impact-image {
-    left: 50%;
     transform: translateX(-50%);
     top: -35px;
   }
