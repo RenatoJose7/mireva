@@ -68,3 +68,41 @@ const showSolutionCards = () => {
 
 window.addEventListener("scroll", showSolutionCards);
 window.addEventListener("load", showSolutionCards);
+
+const counters = document.querySelectorAll(".counter");
+
+const animateCounter = (counter) => {
+  const target = Number(counter.dataset.target);
+  let current = 0;
+  const duration = 1400;
+  const stepTime = 16;
+  const increment = target / (duration / stepTime);
+
+  const update = () => {
+    current += increment;
+
+    if (current < target) {
+      counter.textContent = Math.floor(current);
+      requestAnimationFrame(update);
+    } else {
+      counter.textContent = target;
+    }
+  };
+
+  update();
+};
+
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting && !entry.target.dataset.animated) {
+      entry.target.dataset.animated = "true";
+      animateCounter(entry.target);
+    }
+  });
+}, {
+  threshold: 0.4
+});
+
+counters.forEach((counter) => {
+  counterObserver.observe(counter);
+});
