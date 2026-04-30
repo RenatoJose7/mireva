@@ -4307,3 +4307,56 @@ h1,
     padding-bottom: 30px;
   }
 }
+/* =========================
+   PORTFÓLIO - FIX IPHONE
+========================= */
+@supports (-webkit-touch-callout: none) {
+  @media (max-width: 600px) {
+    .portfolio-carousel {
+      overflow-x: auto !important;
+      overflow-y: hidden !important;
+      -webkit-overflow-scrolling: touch;
+      padding: 4px 0 14px;
+    }
+
+    .portfolio-track {
+      animation: none !important;
+      transform: none !important;
+      width: max-content !important;
+
+      display: flex !important;
+      align-items: flex-start !important;
+      gap: 14px !important;
+    }
+
+    .portfolio-group {
+      display: flex !important;
+      align-items: flex-start !important;
+      gap: 14px !important;
+      flex-shrink: 0 !important;
+    }
+
+    /* esconde a repetição no iPhone para não duplicar visualmente */
+    .portfolio-group[aria-hidden="true"] {
+      display: none !important;
+    }
+
+    .portfolio-card {
+      flex: 0 0 230px !important;
+      width: 230px !important;
+      height: 145px !important;
+      min-width: 230px !important;
+
+      border-radius: 10px !important;
+      overflow: hidden !important;
+    }
+
+    .portfolio-card img {
+      width: 100% !important;
+      height: 100% !important;
+      display: block !important;
+      object-fit: cover !important;
+      object-position: top center !important;
+    }
+  }
+}
