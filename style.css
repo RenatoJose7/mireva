@@ -4307,63 +4307,112 @@ h1,
     padding-bottom: 30px;
   }
 }
-/* =========================
-   PORTFÓLIO - FIX IPHONE
-========================= */
-@supports (-webkit-touch-callout: none) {
-  @media (max-width: 600px) {
-    .portfolio-carousel {
-      overflow-x: auto !important;
-      overflow-y: hidden !important;
-      -webkit-overflow-scrolling: touch;
-      padding: 4px 0 14px;
-    }
 
-    .portfolio-track {
-      animation: none !important;
-      transform: none !important;
-      width: max-content !important;
+/* TRUST - correção texto mobile */
+@media (max-width: 850px) {
+  .trust-container {
+    overflow: hidden !important;
+  }
 
-      display: flex !important;
-      align-items: flex-start !important;
-      gap: 14px !important;
-    }
+  .trust-title,
+  .trust-copy,
+  .trust-content {
+    width: 100% !important;
+    max-width: 100% !important;
+    text-align: center !important;
+    align-items: center !important;
+  }
 
-    .portfolio-group {
-      display: flex !important;
-      align-items: flex-start !important;
-      gap: 14px !important;
-      flex-shrink: 0 !important;
-    }
+  .trust-title h2 {
+    width: 100% !important;
+    max-width: 310px !important;
+    margin: 0 auto !important;
 
-    /* esconde a repetição no iPhone para não duplicar visualmente */
-    .portfolio-group[aria-hidden="true"] {
-      display: none !important;
-    }
+    font-size: clamp(28px, 8vw, 34px) !important;
+    line-height: 0.95 !important;
+    letter-spacing: -0.5px !important;
 
-    .portfolio-card {
-      flex: 0 0 230px !important;
-      width: 230px !important;
-      height: 145px !important;
-      min-width: 230px !important;
+    text-align: center !important;
+    overflow-wrap: break-word !important;
+  }
 
-      border-radius: 10px !important;
-      overflow: hidden !important;
-    }
+  .trust-description,
+  .trust-footer {
+    max-width: 300px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    text-align: center !important;
+  }
 
-    .portfolio-card img {
-      width: 100% !important;
-      height: 100% !important;
-      display: block !important;
-      object-fit: cover !important;
-      object-position: top center !important;
-    }
+  .trust-box {
+    max-width: 300px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
   }
 }
-/* =========================
-   PORTFÓLIO - AUTOPLAY IPHONE
-========================= */
+
+
+/* portfolio   */
+
+.portfolio-carousel {
+  width: 100%;
+  overflow: hidden;
+  margin-top: 18px;
+}
+
+.portfolio-track {
+  display: flex !important;
+  width: max-content !important;
+  gap: 0 !important;
+  animation: none !important;
+  will-change: transform;
+}
+
+.portfolio-group {
+  display: flex !important;
+  align-items: flex-start;
+  gap: 18px;
+  padding-right: 18px;
+  flex: 0 0 auto;
+}
+
+.portfolio-card {
+  flex: 0 0 clamp(190px, 24vw, 330px);
+  width: clamp(190px, 24vw, 330px);
+  aspect-ratio: 16 / 10;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.portfolio-card img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: top center;
+}
+
 @media (max-width: 600px) {
+  .portfolio-group {
+    gap: 12px;
+    padding-right: 12px;
+  }
+
+  .portfolio-card {
+    flex: 0 0 230px;
+    width: 230px;
+    height: 145px;
+    aspect-ratio: auto;
+  }
+}
+
+
+/* PORTFÓLIO - corrigir sumiço no celular em pé */
+@media (max-width: 600px) {
+  .portfolio-group[aria-hidden="true"] {
+    display: flex !important;
+  }
+
   .portfolio-carousel {
     overflow: hidden !important;
     width: 100% !important;
@@ -4371,61 +4420,169 @@ h1,
 
   .portfolio-track {
     display: flex !important;
-    align-items: flex-start !important;
-    gap: 0 !important;
     width: max-content !important;
-    will-change: transform;
-    transform: translate3d(0, 0, 0);
+    gap: 0 !important;
   }
 
   .portfolio-group {
     display: flex !important;
+    flex: 0 0 auto !important;
     align-items: flex-start !important;
     gap: 12px !important;
-    flex: 0 0 auto !important;
-    width: max-content !important;
+    padding-right: 12px !important;
   }
 
   .portfolio-card {
-    flex: 0 0 220px !important;
-    width: 220px !important;
-    height: 140px !important;
-    min-width: 220px !important;
+    flex: 0 0 230px !important;
+    width: 230px !important;
+    height: 145px !important;
+  }
+}
+.portfolio-group[aria-hidden="true"] {
+  display: flex !important;
+}
+
+
+
+
+
+
+/* =========================
+   STRATEGY - RESPONSIVO FIX
+========================= */
+
+/* tablet e mobile: tudo centralizado e imagem sem comer texto */
+@media (max-width: 850px) {
+  .strategy-section {
+    padding: 55px 20px 65px !important;
+    overflow: hidden !important;
   }
 
-  .portfolio-card img {
+  .strategy-content {
+    height: auto !important;
+    min-height: auto !important;
+    margin: 0 auto 34px !important;
+    padding-top: 0 !important;
+
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    gap: 24px !important;
+  }
+
+  .strategy-text {
+    max-width: 420px !important;
     width: 100% !important;
-    height: 100% !important;
-    display: block !important;
-    object-fit: cover !important;
-    object-position: top center !important;
+    padding-top: 0 !important;
+    text-align: center !important;
+    order: 1 !important;
   }
 
-  .carousel-left .portfolio-track {
-    animation: portfolioMobileLeft 22s linear infinite !important;
+  .strategy-text h2,
+  .strategy-text p {
+    margin-left: auto !important;
+    margin-right: auto !important;
+    text-align: center !important;
   }
 
-  .carousel-right .portfolio-track {
-    animation: portfolioMobileRight 22s linear infinite !important;
+  .strategy-text h2 {
+    font-size: clamp(24px, 7vw, 34px) !important;
+    line-height: 1.2 !important;
+    letter-spacing: -0.8px !important;
+    margin-bottom: 12px !important;
   }
 
-  @keyframes portfolioMobileLeft {
-    from {
-      transform: translate3d(0, 0, 0);
-    }
-
-    to {
-      transform: translate3d(calc(-50% - 6px), 0, 0);
-    }
+  .strategy-text p {
+    max-width: 360px !important;
+    font-size: 12px !important;
+    line-height: 1.2 !important;
   }
 
-  @keyframes portfolioMobileRight {
-    from {
-      transform: translate3d(calc(-50% - 6px), 0, 0);
-    }
+  .strategy-image {
+    width: 100% !important;
+    min-height: 150px !important;
 
-    to {
-      transform: translate3d(0, 0, 0);
-    }
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+
+    order: 2 !important;
+    overflow: visible !important;
+  }
+
+  .strategy-image img {
+    width: min(280px, 78vw) !important;
+    transform: rotate(-2deg) translateY(0) !important;
+    margin: 0 auto !important;
+  }
+
+  .cards-carousel {
+    order: 3 !important;
+    max-width: 100% !important;
+    margin-top: 12px !important;
+  }
+
+  .cards-track {
+    margin-top: 0 !important;
+    padding: 8px 8px 18px !important;
+    gap: 14px !important;
+  }
+
+  .strategy-card {
+    flex: 0 0 170px !important;
+    min-height: 170px !important;
+    padding: 18px 12px !important;
+  }
+
+  .strategy-card i {
+    font-size: 42px !important;
+    margin-bottom: 12px !important;
+  }
+
+  .strategy-card h3 {
+    font-size: 13px !important;
+    line-height: 1 !important;
+  }
+
+  .strategy-card p {
+    font-size: 9px !important;
+    line-height: 1.08 !important;
+  }
+}
+
+/* celular pequeno */
+@media (max-width: 480px) {
+  .strategy-section {
+    padding: 48px 12px 58px !important;
+  }
+
+  .strategy-text {
+    max-width: 330px !important;
+  }
+
+  .strategy-text h2 {
+    font-size: 25px !important;
+    line-height: 1.2!important;
+  }
+
+  .strategy-text p {
+    max-width: 315px !important;
+    font-size: 10px !important;
+    line-height: 1.15 !important;
+  }
+
+  .strategy-image {
+    min-height: 140px !important;
+  }
+
+  .strategy-image img {
+    width: min(245px, 82vw) !important;
+    transform: rotate(-2deg) translateX(18px) !important;
+  }
+
+  .strategy-card {
+    flex: 0 0 150px !important;
+    min-height: 160px !important;
   }
 }

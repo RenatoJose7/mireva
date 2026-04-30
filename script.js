@@ -279,4 +279,53 @@ if (backToTop) {
     });
   });
 }
+// Portfolio carousel robusto
+function setupPortfolioLoop() {
+  document.querySelectorAll(".portfolio-carousel").forEach((carousel) => {
+    const track = carousel.querySelector(".portfolio-track");
+    const originalGroup = track?.querySelector(".portfolio-group");
 
+    if (!track || !originalGroup) return;
+
+    // Cria 3 grupos no mobile para evitar vazio no iPhone em pé
+    if (window.innerWidth <= 600 && !track.classList.contains("mobile-loop-ready")) {
+      const groupHTML = originalGroup.innerHTML;
+
+      track.innerHTML = `
+        <div class="portfolio-group">${groupHTML}</div>
+        <div class="portfolio-group">${groupHTML}</div>
+        <div class="portfolio-group">${groupHTML}</div>
+      `;
+
+      track.classList.add("mobile-loop-ready");
+    }
+
+    const groups = track.querySelectorAll(".portfolio-group");
+    const groupWidth = groups[0].getBoundingClientRect().width;
+
+    let x = carousel.classList.contains("carousel-right") ? -groupWidth : 0;
+    const direction = carousel.classList.contains("carousel-right") ? 1 : -1;
+
+    function animate() {
+      const currentGroupWidth = track.querySelector(".portfolio-group").getBoundingClientRect().width;
+      const speed = window.innerWidth <= 600 ? 0.45 : 0.65;
+
+      x += speed * direction;
+
+      if (direction === -1 && x <= -currentGroupWidth) {
+        x = 0;
+      }
+
+      if (direction === 1 && x >= 0) {
+        x = -currentGroupWidth;
+      }
+
+      track.style.transform = `translate3d(${x}px, 0, 0)`;
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+  });
+}
+
+window.addEventListener("load", setupPortfolioLoop);
