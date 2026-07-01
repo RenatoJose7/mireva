@@ -6205,3 +6205,24 @@ section::after {
   section::before { opacity: 0.12; background-size: 96px 96px, 96px 96px, 96px 96px; }
   section::after { opacity: 0.28; width: 90vw; right: -45vw; }
 }
+
+/* ============================================================
+   CORREÇÃO FINAL — HEADER FIXO NAS PÁGINAS INTERNAS
+   ============================================================ */
+.header {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  z-index: 2147483000 !important;
+}
+
+.service-page-hero {
+  padding-top: 150px !important;
+}
+
+@media (max-width: 800px) {
+  .service-page-hero {
+    padding-top: 130px !important;
+  }
+}

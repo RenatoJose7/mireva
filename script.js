@@ -4,9 +4,18 @@
 
 // ===== HEADER SCROLL =====
 const header = document.getElementById('header');
-window.addEventListener('scroll', () => {
+let headerTicking = false;
+const updateHeaderState = () => {
   header?.classList.toggle('scrolled', window.scrollY > 60);
-});
+  headerTicking = false;
+};
+window.addEventListener('scroll', () => {
+  if (!headerTicking) {
+    window.requestAnimationFrame(updateHeaderState);
+    headerTicking = true;
+  }
+}, { passive: true });
+updateHeaderState();
 
 // ===== MOBILE MENU =====
 const menuBtn = document.getElementById('menuBtn');
@@ -107,68 +116,12 @@ faqItems.forEach(item => {
   });
 });
 
-// ===== PORTFOLIO CAROUSEL (JS animation) =====
-
-// ===== PORTFOLIO CAROUSEL OTIMIZADO =====
+// ===== PORTFOLIO CAROUSEL =====
+// O carrossel agora roda por CSS. Removido requestAnimationFrame contínuo para evitar travamentos.
 function setupPortfolioLoop() {
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (reduceMotion) return;
-
-  document.querySelectorAll('.portfolio-carousel').forEach(carousel => {
-    const track = carousel.querySelector('.portfolio-track');
-    const originalGroup = track?.querySelector('.portfolio-group');
-    if (!track || !originalGroup || track.dataset.loopReady === '1') return;
-    track.dataset.loopReady = '1';
-
-    if (window.innerWidth <= 600 && !track.classList.contains('mobile-ready')) {
-      const groupHTML = originalGroup.innerHTML;
-      track.innerHTML = `<div class="portfolio-group">${groupHTML}</div><div class="portfolio-group">${groupHTML}</div>`;
-      track.classList.add('mobile-ready');
-    }
-
-    const direction = carousel.classList.contains('carousel-right') ? 1 : -1;
-    let x = 0;
-    let width = 0;
-    let raf = null;
-    let active = false;
-    track.style.animation = 'none';
+  document.querySelectorAll('.portfolio-track').forEach(track => {
     track.style.willChange = 'transform';
-
-    const measure = () => {
-      const group = track.querySelector('.portfolio-group');
-      width = group ? group.getBoundingClientRect().width : 0;
-      if (direction === 1 && x === 0) x = -width;
-    };
-
-    const frame = () => {
-      if (!active || document.hidden) { raf = null; return; }
-      if (!width) measure();
-      const speed = window.innerWidth <= 600 ? 0.28 : 0.38;
-      x += speed * direction;
-      if (direction === -1 && x <= -width) x = 0;
-      if (direction === 1 && x >= 0) x = -width;
-      track.style.transform = `translate3d(${x}px, 0, 0)`;
-      raf = requestAnimationFrame(frame);
-    };
-
-    const start = () => {
-      if (active) return;
-      active = true;
-      measure();
-      if (!raf) raf = requestAnimationFrame(frame);
-    };
-    const stop = () => {
-      active = false;
-      if (raf) cancelAnimationFrame(raf);
-      raf = null;
-    };
-
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => entry.isIntersecting ? start() : stop());
-    }, { threshold: 0.05 });
-    observer.observe(carousel);
-    window.addEventListener('resize', measure, { passive: true });
-    document.addEventListener('visibilitychange', () => document.hidden ? stop() : start());
+    track.dataset.loopReady = '1';
   });
 }
 window.addEventListener('load', setupPortfolioLoop, { once: true });
@@ -188,7 +141,7 @@ if (form) {
       `Nome: ${name}\nEmpresa: ${company}\nWhatsApp: ${wa}\n` +
       `Tipo: ${project}\nMensagem: ${msg}`;
 
-    window.open(`https://wa.me/5511930308149?text=${encodeURIComponent(text)}`, '_blank');
+    window.open(`https://wa.me/5511918417189?text=${encodeURIComponent(text)}`, '_blank');
 
     const success = form.querySelector('.contact-success');
     if (success) {
@@ -211,31 +164,34 @@ if (backToTop) {
 }
 
 // ===== DASHBOARD SIMULATION =====
+// Otimizado: a simulação só roda enquanto a seção da agenda está visível.
 function initDashboardSimulation() {
   const bookingList = document.getElementById('dashboard-booking-list');
   const countBadge  = document.getElementById('dashboard-booking-count');
-  if (!bookingList || !countBadge) return;
+  const agendaSection = document.getElementById('agenda');
+  if (!bookingList || !countBadge || !agendaSection) return;
 
   let count = 14;
+  let idx = 0;
+  let timer = null;
   const bookings = [
     { time: '14:15', name: 'Gabriel Santos',    service: 'Avaliação Capilar',  badge: 'Pendente',   cls: 'badge-pending'  },
     { time: '15:00', name: 'Letícia Ribeiro',   service: 'Coloração + Escova', badge: 'Confirmado', cls: 'badge-success'  },
     { time: '16:30', name: 'Thiago Oliveira',   service: 'Corte Masculino',    badge: 'Confirmado', cls: 'badge-success'  },
     { time: '17:45', name: 'Beatriz Sousa',     service: 'Design de Cílios',   badge: 'Pendente',   cls: 'badge-pending'  },
   ];
-  let idx = 0;
 
-  setInterval(() => {
+  const tick = () => {
     const d = bookings[idx];
     count++;
     countBadge.textContent = count;
-    countBadge.style.transition = 'transform .3s';
-    countBadge.style.transform  = 'scale(1.25)';
-    setTimeout(() => { countBadge.style.transform = 'scale(1)'; }, 300);
+    countBadge.style.transition = 'transform .25s ease';
+    countBadge.style.transform  = 'scale(1.12)';
+    setTimeout(() => { countBadge.style.transform = 'scale(1)'; }, 260);
 
     const item = document.createElement('div');
     item.className = 'booking-item';
-    item.style.cssText = 'opacity:0;transform:translateY(15px);transition:all .4s ease';
+    item.style.cssText = 'opacity:0;transform:translate3d(0,12px,0);transition:opacity .32s ease, transform .32s ease';
     item.innerHTML = `
       <div class="booking-time">${d.time}</div>
       <div class="booking-info">
@@ -245,22 +201,42 @@ function initDashboardSimulation() {
       <span class="badge ${d.cls}">${d.badge}</span>
     `;
     bookingList.insertBefore(item, bookingList.firstChild);
-    setTimeout(() => { item.style.opacity = '1'; item.style.transform = 'translateY(0)'; }, 50);
+    requestAnimationFrame(() => {
+      item.style.opacity = '1';
+      item.style.transform = 'translate3d(0,0,0)';
+    });
 
     const items = bookingList.querySelectorAll('.booking-item');
     if (items.length > 3) {
       const last = items[items.length - 1];
-      last.style.transition = 'all .4s ease';
       last.style.opacity = '0';
-      last.style.transform = 'translateY(-10px)';
-      setTimeout(() => last.remove(), 400);
+      last.style.transform = 'translate3d(0,-8px,0)';
+      setTimeout(() => last.remove(), 340);
     }
 
     idx = (idx + 1) % bookings.length;
-  }, 4500);
+  };
+
+  const start = () => {
+    if (timer || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    timer = setInterval(tick, 5500);
+  };
+  const stop = () => {
+    if (!timer) return;
+    clearInterval(timer);
+    timer = null;
+  };
+
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => entry.isIntersecting ? start() : stop());
+    }, { threshold: 0.18 });
+    observer.observe(agendaSection);
+  } else {
+    start();
+  }
 }
-window.addEventListener('load', initDashboardSimulation);
+window.addEventListener('load', initDashboardSimulation, { once: true });
 
-// ===== HERO PARALLAX REMOVIDO PARA PERFORMANCE =====
-// O notebook não reage ao mouse. A animação fica somente no CSS.
-
+// ===== HERO =====
+// Laptop animado somente por CSS para evitar conflito de transform/JS.
