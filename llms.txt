@@ -1,0 +1,22 @@
+# Mireva Design & Sistemas
+
+> Empresa brasileira de design e desenvolvimento que cria landing pages, sites institucionais, sistemas web e automações sob medida para pequenas e médias empresas.
+
+## Páginas principais
+
+- [Página inicial](https://mirevadesign.com.br/): visão geral dos serviços, processo e formas de contato.
+- [Criação de sites](https://mirevadesign.com.br/sites.html): sites profissionais para empresas que precisam transmitir confiança e gerar contatos.
+- [Sistemas e automações](https://mirevadesign.com.br/sistemas.html): sistemas personalizados para organizar processos, centralizar informações e reduzir trabalho manual.
+
+## Serviços
+
+- Landing pages para campanhas, captação de leads e vendas.
+- Sites institucionais personalizados e responsivos.
+- Sistemas web e soluções de gestão sob medida.
+- Automações de processos e integrações operacionais.
+
+## Contato
+
+- [WhatsApp](https://wa.me/5511918417189)
+- [Instagram](https://www.instagram.com/mireva.design)
+- [Behance](https://www.behance.net/mirevadesign)

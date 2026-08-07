@@ -1,0 +1,21 @@
+# A busca convencional e a busca por IA podem rastrear o conteúdo público.
+User-agent: *
+Allow: /
+
+# Busca do ChatGPT: permitida.
+User-agent: OAI-SearchBot
+Allow: /
+
+# Uso do conteúdo para treinamento: não permitido.
+User-agent: GPTBot
+Disallow: /
+
+# Uso do conteúdo para treinamento/recursos generativos do Google: não permitido.
+User-agent: Google-Extended
+Disallow: /
+
+# Uso do conteúdo para treinamento: não permitido.
+User-agent: ClaudeBot
+Disallow: /
+
+Sitemap: https://mirevadesign.com.br/sitemap.xml
