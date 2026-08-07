@@ -122,9 +122,18 @@ function setupPortfolioLoop() {
   document.querySelectorAll('.portfolio-track').forEach(track => {
     track.style.willChange = 'transform';
     track.dataset.loopReady = '1';
+    const group = track.querySelector('.portfolio-group');
+    if (!group) return;
+
+    const gap = parseFloat(getComputedStyle(track).gap) || 0;
+    const shift = group.getBoundingClientRect().width + gap;
+    track.style.setProperty('--portfolio-shift', `-${shift}px`);
   });
 }
 window.addEventListener('load', setupPortfolioLoop, { once: true });
+window.addEventListener('resize', () => {
+  window.requestAnimationFrame(setupPortfolioLoop);
+}, { passive: true });
 
 // ===== FORMULÁRIO → WHATSAPP =====
 const form = document.getElementById('mirevaContactForm');
