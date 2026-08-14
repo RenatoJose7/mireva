@@ -120,7 +120,6 @@ faqItems.forEach(item => {
 // O carrossel agora roda por CSS. Removido requestAnimationFrame contínuo para evitar travamentos.
 function setupPortfolioLoop() {
   document.querySelectorAll('.portfolio-track').forEach(track => {
-    track.style.willChange = 'transform';
     track.dataset.loopReady = '1';
     const group = track.querySelector('.portfolio-group');
     if (!group) return;
@@ -130,6 +129,26 @@ function setupPortfolioLoop() {
     track.style.setProperty('--portfolio-shift', `-${shift}px`);
   });
 }
+
+function setupPortfolioVisibility() {
+  const sections = document.querySelectorAll('.portfolio-section');
+  if (!sections.length) return;
+
+  if (!('IntersectionObserver' in window)) {
+    sections.forEach(section => section.classList.add('is-portfolio-active'));
+    return;
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      entry.target.classList.toggle('is-portfolio-active', entry.isIntersecting);
+    });
+  }, { rootMargin: '160px 0px' });
+
+  sections.forEach(section => observer.observe(section));
+}
+
+setupPortfolioVisibility();
 window.addEventListener('load', setupPortfolioLoop, { once: true });
 window.addEventListener('resize', () => {
   window.requestAnimationFrame(setupPortfolioLoop);
@@ -249,3 +268,13 @@ window.addEventListener('load', initDashboardSimulation, { once: true });
 
 // ===== HERO =====
 // Laptop animado somente por CSS para evitar conflito de transform/JS.
+
+// ===== CARROSSEL DE CASES DO BEHANCE =====
+function initBehanceCarousel() {
+  const carousel = document.getElementById('behanceCarousel');
+  if (!carousel) return;
+  const step = () => Math.min(carousel.clientWidth * .82, 382);
+  document.querySelector('.behance-next')?.addEventListener('click', () => carousel.scrollBy({ left: step(), behavior: 'smooth' }));
+  document.querySelector('.behance-prev')?.addEventListener('click', () => carousel.scrollBy({ left: -step(), behavior: 'smooth' }));
+}
+window.addEventListener('load', initBehanceCarousel, { once: true });
