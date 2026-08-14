@@ -273,8 +273,46 @@ window.addEventListener('load', initDashboardSimulation, { once: true });
 function initBehanceCarousel() {
   const carousel = document.getElementById('behanceCarousel');
   if (!carousel) return;
+  const cards = [...carousel.querySelectorAll('.behance-card')];
+  const pagination = document.getElementById('behancePagination');
   const step = () => Math.min(carousel.clientWidth * .82, 382);
   document.querySelector('.behance-next')?.addEventListener('click', () => carousel.scrollBy({ left: step(), behavior: 'smooth' }));
   document.querySelector('.behance-prev')?.addEventListener('click', () => carousel.scrollBy({ left: -step(), behavior: 'smooth' }));
+
+  if (!pagination || !cards.length) return;
+  const dots = cards.map((card, index) => {
+    const dot = document.createElement('button');
+    dot.type = 'button';
+    dot.className = 'behance-dot';
+    dot.setAttribute('aria-label', `Ir para o case ${index + 1}`);
+    dot.addEventListener('click', () => {
+      carousel.scrollTo({ left: card.offsetLeft, behavior: 'smooth' });
+    });
+    pagination.appendChild(dot);
+    return dot;
+  });
+
+  let scrollFrame = 0;
+  const updatePagination = () => {
+    scrollFrame = 0;
+    let activeIndex = 0;
+    let closestDistance = Infinity;
+    cards.forEach((card, index) => {
+      const distance = Math.abs(card.offsetLeft - carousel.scrollLeft);
+      if (distance < closestDistance) {
+        closestDistance = distance;
+        activeIndex = index;
+      }
+    });
+    dots.forEach((dot, index) => {
+      const isActive = index === activeIndex;
+      dot.classList.toggle('is-active', isActive);
+      dot.setAttribute('aria-current', isActive ? 'true' : 'false');
+    });
+  };
+  carousel.addEventListener('scroll', () => {
+    if (!scrollFrame) scrollFrame = window.requestAnimationFrame(updatePagination);
+  }, { passive: true });
+  updatePagination();
 }
 window.addEventListener('load', initBehanceCarousel, { once: true });
