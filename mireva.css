@@ -686,10 +686,11 @@ a { text-decoration: none; color: inherit; }
 }
 @media (max-width: 700px) {
   .behance-section { padding: 80px 20px; }
+  .behance-section .section-container { padding-left: 0 !important; padding-right: 0 !important; }
   .behance-carousel-wrap { display: block; width: 100%; }
   .behance-arrow { display: none; }
   .behance-carousel { width: 100%; padding-left: 0; padding-right: 0; }
-  .behance-card { flex-basis: min(330px, calc(100vw - 40px)); }
+  .behance-card { flex-basis: 100%; }
   .behance-card img { height: 190px; }
   .cases-cta { flex-direction: column; align-items: flex-start; padding: 24px; gap: 20px; }
 }
