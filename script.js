@@ -275,9 +275,51 @@ function initBehanceCarousel() {
   if (!carousel) return;
   const cards = [...carousel.querySelectorAll('.behance-card')];
   const pagination = document.getElementById('behancePagination');
+  const mobileCue = document.querySelector('.behance-mobile-cue');
   const step = () => Math.min(carousel.clientWidth * .82, 382);
   document.querySelector('.behance-next')?.addEventListener('click', () => carousel.scrollBy({ left: step(), behavior: 'smooth' }));
   document.querySelector('.behance-prev')?.addEventListener('click', () => carousel.scrollBy({ left: -step(), behavior: 'smooth' }));
+  mobileCue?.addEventListener('click', () => carousel.scrollBy({ left: step(), behavior: 'smooth' }));
+
+  // A rolagem nativa varia entre navegadores móveis. O gesto abaixo garante
+  // que o carrossel avance no iPhone e em aparelhos Android, sem abrir o case
+  // quando a intenção da pessoa foi deslizar.
+  let pointerId = null;
+  let startX = 0;
+  let startScrollLeft = 0;
+  let dragged = false;
+  const finishDrag = () => {
+    if (pointerId !== null) {
+      try { carousel.releasePointerCapture(pointerId); } catch (_) { /* captura já liberada */ }
+    }
+    pointerId = null;
+    carousel.classList.remove('is-dragging');
+    window.setTimeout(() => { dragged = false; }, 0);
+  };
+  carousel.addEventListener('pointerdown', (event) => {
+    if (event.pointerType === 'mouse' && event.button !== 0) return;
+    pointerId = event.pointerId;
+    startX = event.clientX;
+    startScrollLeft = carousel.scrollLeft;
+    dragged = false;
+    carousel.setPointerCapture?.(pointerId);
+    carousel.classList.add('is-dragging');
+  });
+  carousel.addEventListener('pointermove', (event) => {
+    if (event.pointerId !== pointerId) return;
+    const distance = event.clientX - startX;
+    if (Math.abs(distance) > 5) {
+      dragged = true;
+      carousel.scrollLeft = startScrollLeft - distance;
+    }
+  });
+  carousel.addEventListener('pointerup', finishDrag);
+  carousel.addEventListener('pointercancel', finishDrag);
+  carousel.addEventListener('click', (event) => {
+    if (!dragged) return;
+    event.preventDefault();
+    event.stopPropagation();
+  }, true);
 
   if (!pagination || !cards.length) return;
   const dots = cards.map((card, index) => {

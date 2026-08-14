@@ -644,8 +644,9 @@ a { text-decoration: none; color: inherit; }
 .behance-section .navy-label { background: rgba(252,163,17,.08); color: var(--gold); border-color: rgba(252,163,17,.35); }
 .behance-sub { color: var(--text-muted) !important; max-width: 680px; margin: 14px auto 38px; }
 .behance-carousel-wrap { max-width: 1160px; margin: 0 auto; position: relative; display: flex; align-items: center; gap: 16px; }
-.behance-carousel { display: flex; gap: 22px; overflow-x: auto; scroll-behavior: smooth; scrollbar-width: none; padding: 12px 4px 28px; cursor: default; flex: 1; touch-action: auto; scroll-snap-type: x mandatory; overscroll-behavior-x: contain; -webkit-overflow-scrolling: touch; position: relative; z-index: 3; pointer-events: auto; }
+.behance-carousel { display: flex; gap: 22px; overflow-x: auto; scroll-behavior: smooth; scrollbar-width: none; padding: 12px 4px 28px; cursor: grab; flex: 1; touch-action: pan-y; scroll-snap-type: x mandatory; overscroll-behavior-x: contain; -webkit-overflow-scrolling: touch; position: relative; z-index: 3; pointer-events: auto; }
 .behance-carousel::-webkit-scrollbar { display: none; }
+.behance-carousel.is-dragging { cursor: grabbing; user-select: none; }
 .behance-card { flex: 0 0 min(360px, 78vw); background: #1d173b; border: 1px solid rgba(255,240,194,.14); border-radius: var(--radius-lg); overflow: hidden; text-align: left; box-shadow: 0 12px 35px rgba(0,0,0,.18); transition: transform .3s, box-shadow .3s; display: flex; flex-direction: column; cursor: pointer; text-decoration: none; scroll-snap-align: start; scroll-snap-stop: always; pointer-events: auto; }
 .behance-card:hover { transform: translateY(-7px); box-shadow: 0 22px 48px rgba(0,0,0,.3); }
 .behance-card:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
@@ -692,10 +693,10 @@ a { text-decoration: none; color: inherit; }
   .behance-carousel-wrap { display: block; width: 100%; }
   .behance-arrow { display: none; }
   .behance-carousel { width: 100%; padding-left: 0; padding-right: 0; }
-  .behance-card { flex-basis: 100%; }
+  .behance-card { flex-basis: calc(100% - 38px); }
   .behance-card img { height: 190px; }
-  .behance-mobile-cue { display: inline-flex; align-items: center; justify-content: center; gap: 9px; margin: 0 auto 12px; color: rgba(255,240,194,.68); font-size: .72rem; font-weight: 700; letter-spacing: .04em; }
-  .behance-mobile-cue i { color: var(--gold); font-size: .68rem; }
+  .behance-mobile-cue { display: inline-flex; align-items: center; justify-content: center; gap: 8px; margin: 2px auto 13px; padding: 0; border: 0; background: transparent; color: rgba(255,240,194,.68); font: inherit; font-size: .72rem; font-weight: 700; letter-spacing: .04em; cursor: pointer; }
+  .behance-mobile-cue i { color: var(--gold); font-size: .74rem; }
   .behance-pagination { display: flex; align-items: center; justify-content: center; gap: 7px; min-height: 8px; margin: 0 auto 26px; }
   .behance-dot { width: 6px; height: 6px; padding: 0; border: 0; border-radius: 999px; background: rgba(255,240,194,.30); cursor: pointer; transition: width .22s ease, background-color .22s ease; }
   .behance-dot.is-active { width: 21px; background: var(--gold); }
