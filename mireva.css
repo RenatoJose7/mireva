@@ -3108,6 +3108,11 @@ body::after { opacity: .38 !important; }
   background: linear-gradient(90deg, #070e1a 0%, #090f1a 56%, #0c1019 65%, #1e1e22 78%, #2b282b 91%, #22252d 100%);
 }
 
+.hero-banner-art picture {
+  display: block;
+  height: 100%;
+}
+
 .hero-banner-art img {
   display: block;
   width: auto;
@@ -3188,5 +3193,36 @@ body::after { opacity: .38 !important; }
     background:
       linear-gradient(90deg, #080f1b 0%, rgba(8, 15, 27, .98) 30%, rgba(8, 15, 27, .22) 57%, rgba(8, 15, 27, 0) 76%),
       linear-gradient(0deg, #080f1b 0%, rgba(8, 15, 27, 0) 23%) !important;
+  }
+}
+
+/* Em retrato, a imagem ocupa a base da hero e mantém o casal centralizado. */
+@media (max-width: 640px) {
+  .hero-section {
+    padding-bottom: 370px !important;
+  }
+
+  .hero-banner-art {
+    top: auto;
+    right: auto;
+    bottom: 0;
+    left: -140px;
+    width: clamp(475px, calc(100vw + 155px), 560px);
+    height: clamp(334px, calc(66.667vw + 103px), 373px);
+    background: #080f1b;
+  }
+
+  .hero-banner-art img {
+    width: 100% !important;
+    height: 100% !important;
+    margin: 0 !important;
+    object-fit: cover;
+    object-position: center center;
+  }
+
+  .hero-banner-art::after {
+    background:
+      linear-gradient(180deg, #080f1b 0%, rgba(8, 15, 27, .9) 20%, rgba(8, 15, 27, .36) 47%, rgba(8, 15, 27, 0) 70%),
+      linear-gradient(90deg, #080f1b 0%, rgba(8, 15, 27, .24) 50%, rgba(8, 15, 27, 0) 80%) !important;
   }
 }
