@@ -2871,7 +2871,7 @@ body::after { opacity: .38 !important; }
   .behance-section { padding-top: 58px !important; }
 }
 
-/* Detalhes de fundo unificados: linhas leves e luz difusa na nova paleta. */
+/* Brilhos difusos em azul e branco, com presença sem linhas decorativas. */
 :is(.numbers-section, .pain-section, .solutions-section, .portfolio-section,
   .behance-section, .agenda-section, .why-section, .process-section,
   .faq-section, .contact-section, .footer) {
@@ -2892,27 +2892,29 @@ body::after { opacity: .38 !important; }
   transform: none !important;
   -webkit-mask-image: none !important;
   mask-image: none !important;
+  filter: none !important;
   opacity: 1 !important;
   background:
-    linear-gradient(116deg, transparent 0 43%, rgba(131, 185, 221, .16) 43.12% 43.28%, transparent 43.42% 100%),
-    linear-gradient(116deg, transparent 0 61%, rgba(255, 255, 255, .16) 61.12% 61.24%, transparent 61.36% 100%) !important;
+    radial-gradient(ellipse 58% 62% at 50% 50%, rgba(131, 185, 221, .17) 0%, rgba(131, 185, 221, .065) 38%, transparent 72%),
+    radial-gradient(ellipse 36% 42% at 50% 50%, rgba(255, 255, 255, .055), transparent 72%) !important;
 }
 
 :is(.numbers-section, .pain-section, .solutions-section, .portfolio-section,
   .behance-section, .agenda-section, .why-section, .process-section,
   .faq-section, .contact-section, .footer)::after {
-  content: '' !important;
-  display: block !important;
+  content: none !important;
+  display: none !important;
   position: absolute !important;
   z-index: 0 !important;
   pointer-events: none !important;
-  inset: auto -9% 10% auto !important;
-  width: clamp(160px, 22vw, 340px) !important;
-  height: clamp(160px, 22vw, 340px) !important;
-  border: 1px solid rgba(131, 185, 221, .18) !important;
+  inset: auto !important;
+  width: 0 !important;
+  height: 0 !important;
+  border: 0 !important;
   border-radius: 50% !important;
-  background: radial-gradient(circle, rgba(131, 185, 221, .10), transparent 69%) !important;
+  background: none !important;
   transform: none !important;
+  filter: none !important;
   opacity: 1 !important;
 }
 
@@ -2927,9 +2929,78 @@ body::after { opacity: .38 !important; }
   :is(.numbers-section, .pain-section, .solutions-section, .portfolio-section,
     .behance-section, .agenda-section, .why-section, .process-section,
     .faq-section, .contact-section, .footer)::after {
-    right: -24% !important;
-    bottom: 7% !important;
-    width: 220px !important;
-    height: 220px !important;
+    right: auto !important;
+    bottom: auto !important;
+    width: 0 !important;
+    height: 0 !important;
   }
+}
+
+/* Sem traços decorativos: o fundo usa apenas brilho borrado e pontual. */
+body::before {
+  display: none !important;
+  content: none !important;
+}
+
+body::after {
+  filter: none !important;
+  opacity: .26 !important;
+}
+
+.hero-section::before,
+.hero-section::after {
+  filter: none !important;
+}
+
+/* Hero sem riscos: apenas luzes amplas, como nas demais seções. */
+.hero-section::before {
+  content: '' !important;
+  display: block !important;
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 0 !important;
+  transform: none !important;
+  -webkit-mask-image: none !important;
+  mask-image: none !important;
+  opacity: 1 !important;
+  background:
+    radial-gradient(ellipse 48% 52% at 84% 27%, rgba(131, 185, 221, .25), transparent 68%),
+    radial-gradient(ellipse 34% 42% at 13% 78%, rgba(255, 255, 255, .10), transparent 72%) !important;
+}
+
+.hero-section::after {
+  background:
+    radial-gradient(circle at 76% 42%, rgba(131, 185, 221, .23), transparent 42%),
+    radial-gradient(circle at 20% 74%, rgba(255, 255, 255, .09), transparent 46%) !important;
+}
+
+/* A faixa de resultados continua limpa para preservar a leitura dos números. */
+.numbers-section {
+  background: #0f082b !important;
+}
+
+.numbers-section::before,
+.numbers-section::after {
+  content: none !important;
+  display: none !important;
+}
+
+.numbers-inner {
+  background: rgba(255, 255, 255, .035) !important;
+  box-shadow: none !important;
+}
+
+/* Cabeçalho liso: nenhum detalhe do fundo atravessa a navegação. */
+.header,
+.header.scrolled {
+  background: #0f082b !important;
+  box-shadow: none !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+
+.header::before,
+.header::after {
+  content: none !important;
+  display: none !important;
 }

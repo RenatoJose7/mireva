@@ -6227,7 +6227,7 @@ section::after {
   }
 }
 
-/* Fundo unificado nas páginas internas: detalhes sutis em azul e branco. */
+/* Fundo unificado nas páginas internas: brilhos suaves e luminosos. */
 main > section,
 .footer-section {
   position: relative;
@@ -6243,27 +6243,44 @@ main > section::before,
   z-index: 0;
   pointer-events: none;
   background:
-    linear-gradient(116deg, transparent 0 43%, rgba(131, 185, 221, .16) 43.12% 43.28%, transparent 43.42% 100%),
-    linear-gradient(116deg, transparent 0 61%, rgba(255, 255, 255, .16) 61.12% 61.24%, transparent 61.36% 100%);
+    radial-gradient(ellipse 58% 62% at 50% 50%, rgba(131, 185, 221, .17) 0%, rgba(131, 185, 221, .065) 38%, transparent 72%),
+    radial-gradient(ellipse 36% 42% at 50% 50%, rgba(255, 255, 255, .055), transparent 72%);
+  filter: none;
 }
 
 main > section::after,
 .footer-section::after {
-  content: '';
+  content: none;
+  display: none;
   position: absolute;
   z-index: 0;
   pointer-events: none;
-  right: -9%;
-  bottom: 10%;
-  width: clamp(160px, 22vw, 340px);
-  height: clamp(160px, 22vw, 340px);
-  border: 1px solid rgba(131, 185, 221, .18);
+  right: auto;
+  bottom: auto;
+  width: 0;
+  height: 0;
+  border: 0;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(131, 185, 221, .10), transparent 69%);
+  background: none;
+  filter: none;
 }
 
 main > section > *,
 .footer-section > * {
   position: relative;
   z-index: 1;
+}
+
+/* Cabeçalho liso nas páginas internas. */
+.header {
+  background: #0f082b !important;
+  box-shadow: none !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+
+.header::before,
+.header::after {
+  content: none !important;
+  display: none !important;
 }
