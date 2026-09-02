@@ -17,6 +17,19 @@ window.addEventListener('scroll', () => {
 }, { passive: true });
 updateHeaderState();
 
+// ===== META PIXEL — CONTATOS =====
+// Registra intenção de contato apenas nos links que levam ao WhatsApp.
+const trackMetaEvent = (eventName) => {
+  if (typeof window.fbq === 'function') {
+    window.fbq('track', eventName);
+  }
+};
+
+document.addEventListener('click', (event) => {
+  const whatsappLink = event.target.closest('a[href*="wa.me/"]');
+  if (whatsappLink) trackMetaEvent('Contact');
+});
+
 // ===== MOBILE MENU =====
 const menuBtn = document.getElementById('menuBtn');
 const nav     = document.getElementById('nav');
@@ -159,6 +172,8 @@ const form = document.getElementById('mirevaContactForm');
 if (form) {
   form.addEventListener('submit', (e) => {
     e.preventDefault();
+    if (!form.checkValidity()) return;
+
     const name    = document.getElementById('contactName')?.value.trim()    || '';
     const company = document.getElementById('contactCompany')?.value.trim() || '';
     const wa      = document.getElementById('contactWhatsapp')?.value.trim()|| '';
@@ -169,6 +184,8 @@ if (form) {
       `Nome: ${name}\nEmpresa: ${company}\nWhatsApp: ${wa}\n` +
       `Tipo: ${project}\nMensagem: ${msg}`;
 
+    // O evento só acontece depois de o formulário obrigatório estar válido.
+    trackMetaEvent('Lead');
     window.open(`https://wa.me/5511918417189?text=${encodeURIComponent(text)}`, '_blank');
 
     const success = form.querySelector('.contact-success');
