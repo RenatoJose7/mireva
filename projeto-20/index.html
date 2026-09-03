@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Projeto 20 da Mireva: landing pages profissionais para 20 empresas, com domínio incluso por 12 meses.">
+  <meta name="theme-color" content="#0f082b">
+  <title>Projeto 20 | Mireva Design & Sistemas</title>
+  <link rel="icon" type="image/png" href="assets/img/logo-branca.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="stylesheet" href="style.css?v=7">
+  <style>
+    /* Mantido aqui para o preview sempre renderizar os modelos como seções completas. */
+    .p20-model-grid{display:grid;grid-template-columns:1fr;overflow:visible;gap:25px;margin-top:57px;padding:0;scroll-snap-type:none}
+    .p20-model{display:grid;grid-template-columns:minmax(330px,.92fr) 1.08fr;grid-template-areas:"top top" "phone info";align-items:stretch;flex:none;width:100%;border-radius:18px;scroll-snap-align:none}
+    .p20-model:nth-child(even){grid-template-areas:"top top" "info phone"}
+    .p20-model-top{grid-area:top;padding:19px 23px;border-bottom:1px solid #e4e2eb}.p20-model-phone{grid-area:phone;height:440px}.p20-model-phone .p20-phone{transform:translateY(42px) scale(1.12)}
+    .p20-model-info{grid-area:info;display:flex;flex-direction:column;justify-content:center;padding:48px clamp(30px,6vw,82px)}.p20-model-info h3{font-size:clamp(2.7rem,5vw,4.4rem)}
+    .p20-model-info>p{max-width:425px;min-height:0;font-size:.9rem;line-height:1.7;margin:15px 0 25px}.p20-model-info ul{max-width:430px;grid-template-columns:repeat(3,1fr);gap:8px 13px;font-size:.67rem}.p20-model-cta{max-width:430px;margin-top:28px;font-size:.78rem}
+    @media(max-width:780px){.p20-model-grid{margin:40px 0 0;gap:17px}.p20-model,.p20-model:nth-child(even){grid-template-columns:1fr;grid-template-areas:"top" "phone" "info"}.p20-model-phone{height:330px}.p20-model-phone .p20-phone{transform:translateY(28px)}.p20-model-info{padding:29px 22px 25px}.p20-model-info h3{font-size:3rem}.p20-model-info>p{font-size:.8rem;margin:11px 0 19px}.p20-model-info ul{grid-template-columns:repeat(2,1fr);font-size:.62rem}.p20-model-cta{margin-top:21px}}
+  </style>
+</head>
+<body>
+  <div class="p20-grain" aria-hidden="true"></div>
+  <header class="p20-header">
+    <a class="p20-brand" href="#inicio" aria-label="Projeto 20, início">
+      <img src="assets/img/logo-branca.png" alt="Mireva">
+      <span>MIREVA</span>
+    </a>
+    <span class="p20-header-project">Projeto <i>20</i></span>
+    <a class="p20-header-cta p20-whatsapp" data-message="Olá, Mireva! Quero saber mais sobre o Projeto 20." href="#vagas">Participar <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+  </header>
+
+  <main>
+    <section class="p20-hero" id="inicio">
+      <div class="p20-shell p20-hero-grid">
+        <div class="p20-hero-copy p20-reveal">
+          <p class="p20-kicker"><span></span> PROJETO 20 <b>•</b> SETEMBRO</p>
+          <h1>Seu site profissional <em>por R$340.</em></h1>
+          <p class="p20-lead">Selecionamos 20 empresas para receber uma landing page profissional criada pela Mireva, com domínio incluso por 12 meses.</p>
+          <div class="p20-vacancies" aria-label="Disponibilidade da campanha">
+            <div class="p20-vacancy-head"><span>Disponibilidade da campanha</span><strong><b data-vacancies>20</b> vagas restantes</strong></div>
+            <div class="p20-progress" role="progressbar" aria-valuemin="0" aria-valuemax="20" aria-valuenow="0"><span data-progress></span></div>
+            <small><b data-filled>0</b> de 20 vagas preenchidas</small>
+          </div>
+          <a class="p20-button p20-whatsapp" data-message="Olá, Mireva! Quero garantir uma das vagas do Projeto 20." href="#vagas">Quero uma das 20 vagas <i class="fa-brands fa-whatsapp"></i></a>
+          <ul class="p20-points"><li>Domínio por 12 meses</li><li>Até 6 seções</li><li>WhatsApp integrado</li><li>Sem mensalidade</li></ul>
+        </div>
+        <div class="p20-hero-art p20-reveal" style="--delay:.14s" aria-label="Prévia de uma landing page Mireva">
+          <div class="p20-orbit p20-orbit-a"></div><div class="p20-orbit p20-orbit-b"></div>
+          <div class="p20-phone p20-phone-hero">
+            <div class="p20-phone-bar"></div>
+            <div class="p20-screen p20-demo-atlas">
+              <div class="p20-demo-brand">NORT<br>ENERGIA</div><div class="p20-demo-line wide"></div><div class="p20-demo-line"></div><div class="p20-demo-action">SOLICITAR ORÇAMENTO</div><div class="p20-demo-photo"></div><div class="p20-demo-title">Energia que<br>move negócios.</div><div class="p20-demo-blocks"><i></i><i></i><i></i></div>
+            </div>
+          </div>
+          <div class="p20-price-sticker"><small>a partir de</small><strong>R$340</strong><span>domínio incluso</span></div>
+          <div class="p20-art-caption"><span></span> Personalizado para sua empresa</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="p20-video p20-section">
+      <div class="p20-shell p20-center p20-reveal">
+        <p class="p20-eyebrow">Em poucos segundos</p>
+        <h2>Entenda o Projeto 20 <em>em menos de 1 minuto.</em></h2>
+        <div class="p20-video-frame" role="img" aria-label="Espaço reservado para o vídeo do Projeto 20">
+          <div class="p20-video-glow"></div><span class="p20-video-label">Vídeo em breve</span><button class="p20-play" type="button" aria-label="Vídeo do Projeto 20 em breve"><i class="fa-solid fa-play"></i></button><div class="p20-video-copy"><span>Projeto</span><b>20</b></div>
+        </div>
+        <p class="p20-video-foot">Você escolhe o modelo. Nós transformamos em um site com a identidade da sua empresa.</p>
+      </div>
+    </section>
+
+    <section class="p20-models p20-section" id="modelos">
+      <div class="p20-shell">
+        <div class="p20-section-heading p20-reveal"><p class="p20-eyebrow">Três estruturas, infinitas possibilidades</p><h2>Escolha a estrutura que <em>combina com sua empresa.</em></h2><p>Criamos três modelos profissionais. Você escolhe a base e nós personalizamos todo o conteúdo para o seu negócio.</p></div>
+        <div class="p20-model-grid">
+          <article class="p20-model p20-model-atlas p20-reveal">
+            <div class="p20-model-top"><span class="p20-model-number">01</span><span class="p20-model-tag">SERVIÇOS</span></div>
+            <div class="p20-model-phone"><div class="p20-laptop"><span class="p20-laptop-camera" aria-hidden="true"></span><div class="p20-laptop-screen"><video class="p20-atlas-video" autoplay muted loop playsinline controls preload="metadata" aria-label="Vídeo de demonstração da landing page Atlas"><source src="assets/videos/atlas-preview-optimized.mp4" type="video/mp4">Seu navegador não suporta vídeo.</video></div></div></div>
+            <div class="p20-model-info"><span class="p20-model-preview"><i class="fa-solid fa-play"></i> Vídeo do modelo</span><h3>Atlas</h3><p>Direto, comercial e pensado para transformar visitas em pedidos de orçamento.</p><p class="p20-model-for">Para serviços, manutenção, construção, climatização e empresas comerciais.</p><ul><li>Hero</li><li>Serviços</li><li>Diferenciais</li><li>Projetos</li><li>Avaliações</li><li>Contato</li></ul><a class="p20-model-cta p20-whatsapp" data-message="Olá, Mireva! Quero o modelo Atlas no Projeto 20." href="#vagas">Quero o Atlas <i class="fa-solid fa-arrow-right"></i></a></div>
+          </article>
+          <article class="p20-model p20-model-aura p20-reveal" style="--delay:.1s">
+            <div class="p20-model-top"><span class="p20-model-number">02</span><span class="p20-model-tag">BEM-ESTAR</span></div>
+            <div class="p20-model-phone"><div class="p20-phone"><div class="p20-phone-bar"></div><div class="p20-screen p20-demo-aura"><div class="p20-demo-brand">CLÍNICA<br>ORIGEM</div><div class="p20-aura-flower">✦</div><div class="p20-aura-title">Cuidar de você<br>é essencial.</div><div class="p20-aura-button">AGENDAR</div><div class="p20-aura-image"></div><div class="p20-aura-cards"><i></i><i></i></div></div></div></div>
+            <div class="p20-model-info"><span class="p20-model-preview"><i class="fa-solid fa-play"></i> Prévia animada</span><h3>Aura</h3><p>Elegante, leve e criado para apresentar serviços e transmitir confiança.</p><p class="p20-model-for">Para clínicas, saúde, estética, psicologia e profissionais liberais.</p><ul><li>Hero</li><li>Sobre</li><li>Especialidades</li><li>Diferenciais</li><li>Depoimentos</li><li>Agendamento</li></ul><a class="p20-model-cta p20-whatsapp" data-message="Olá, Mireva! Quero o modelo Aura no Projeto 20." href="#vagas">Quero o Aura <i class="fa-solid fa-arrow-right"></i></a></div>
+          </article>
+          <article class="p20-model p20-model-nexo p20-reveal" style="--delay:.2s">
+            <div class="p20-model-top"><span class="p20-model-number">03</span><span class="p20-model-tag">CORPORATIVO</span></div>
+            <div class="p20-model-phone"><div class="p20-phone"><div class="p20-phone-bar"></div><div class="p20-screen p20-demo-nexo"><div class="p20-demo-brand">NEXUS<br>ARQUITETURA</div><div class="p20-nexo-title">Espaços que<br>fazem sentido.</div><div class="p20-nexo-number">01 — 24</div><div class="p20-nexo-image"></div><div class="p20-nexo-links">PROJETOS &nbsp; SOBRE &nbsp; CONTATO</div><div class="p20-nexo-band"></div></div></div></div>
+            <div class="p20-model-info"><span class="p20-model-preview"><i class="fa-solid fa-play"></i> Prévia animada</span><h3>Nexo</h3><p>Uma estrutura corporativa para empresas que precisam transmitir autoridade.</p><p class="p20-model-for">Para consultorias, arquitetura, imobiliárias e empresas B2B.</p><ul><li>Hero</li><li>Empresa</li><li>Soluções</li><li>Diferenciais</li><li>Cases</li><li>Orçamento</li></ul><a class="p20-model-cta p20-whatsapp" data-message="Olá, Mireva! Quero o modelo Nexo no Projeto 20." href="#vagas">Quero o Nexo <i class="fa-solid fa-arrow-right"></i></a></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="p20-included p20-section">
+      <div class="p20-shell p20-included-grid"><div class="p20-section-heading p20-reveal"><p class="p20-eyebrow">O essencial, bem resolvido</p><h2>Tudo que sua empresa precisa <em>para começar.</em></h2><p>Uma presença digital que parece com a sua marca e torna fácil entrar em contato.</p><blockquote>“Você não recebe um site genérico. Escolhe uma estrutura Mireva e nós adaptamos toda a experiência para sua empresa.”</blockquote></div><ul class="p20-included-list p20-reveal" style="--delay:.12s"><li><i class="fa-solid fa-check"></i> Landing page com até 6 seções</li><li><i class="fa-solid fa-check"></i> Layout profissional e responsivo</li><li><i class="fa-solid fa-check"></i> Cores, logo e identidade da empresa</li><li><i class="fa-solid fa-check"></i> Fotos e conteúdo do seu negócio</li><li><i class="fa-solid fa-check"></i> Integração com WhatsApp</li><li><i class="fa-solid fa-check"></i> Localização ou mapa opcional</li><li><i class="fa-solid fa-check"></i> Domínio por 12 meses</li><li><i class="fa-solid fa-check"></i> Publicação e uma rodada de ajustes</li><li><i class="fa-solid fa-check"></i> Sem mensalidade obrigatória</li></ul></div>
+    </section>
+
+    <section class="p20-process p20-section"><div class="p20-shell"><div class="p20-section-heading p20-reveal"><p class="p20-eyebrow">Simples e acompanhado</p><h2>Do modelo escolhido ao <em>site publicado.</em></h2></div><ol class="p20-steps"><li class="p20-reveal"><b>01</b><span>Escolha seu modelo</span></li><li class="p20-reveal"><b>02</b><span>Fale com a Mireva</span></li><li class="p20-reveal"><b>03</b><span>Envie suas informações</span></li><li class="p20-reveal"><b>04</b><span>Nós personalizamos</span></li><li class="p20-reveal"><b>05</b><span>Você aprova</span></li><li class="p20-reveal"><b>06</b><span>Publicamos seu site</span></li></ol></div></section>
+
+    <section class="p20-work p20-section"><div class="p20-shell"><div class="p20-section-heading p20-reveal"><p class="p20-eyebrow">Quem cria é a Mireva</p><h2>Sites desenvolvidos <em>pela Mireva.</em></h2><p>Design, desenvolvimento e tecnologia para transformar a presença digital de empresas.</p></div><p class="p20-project-note p20-reveal"><i class="fa-solid fa-circle-info"></i> Projetos demonstrativos: o portfólio inclui landing pages, e-commerces e outras soluções digitais desenvolvidas pela Mireva.</p><div class="p20-case-carousel-wrap p20-reveal"><button class="p20-case-arrow p20-case-prev" type="button" aria-label="Ver projetos anteriores"><i class="fa-solid fa-arrow-left"></i></button><div class="p20-case-carousel" id="p20CaseCarousel" aria-label="Carrossel de projetos da Mireva"><a class="p20-case-card" href="https://www.behance.net/gallery/254994459/Advocacia-Criminal-Landing-Page-Web-Design" target="_blank" rel="noopener"><img src="assets/img/behance/advocacia-criminal.png" alt="Landing page para advocacia criminal" loading="lazy"><span>Landing Page</span><h3>Advocacia Criminal — Landing Page &amp; Web Design</h3><p>Presença digital pautada em autoridade, discrição e sofisticação para um escritório de advocacia criminal.</p><b>Ver case completo <i class="fa-solid fa-arrow-up-right-from-square"></i></b></a><a class="p20-case-card" href="https://www.behance.net/gallery/253688477/Aureni-Caldeira-Landing-Page-Profissional" target="_blank" rel="noopener"><img src="assets/img/behance/educacao-publica.png" alt="Landing page profissional de Aureni Caldeira" loading="lazy"><span>Landing Page</span><h3>Aureni Caldeira — Landing Page Profissional</h3><p>Landing page criada para comunicar uma atuação educacional com clareza e proximidade.</p><b>Ver case completo <i class="fa-solid fa-arrow-up-right-from-square"></i></b></a><a class="p20-case-card" href="https://www.behance.net/gallery/253688427/E-commerce-de-Produtos-Personalizados" target="_blank" rel="noopener"><img src="assets/img/behance/sublime-amour.png" alt="E-commerce de produtos personalizados" loading="lazy"><span>E-commerce</span><h3>E-commerce de Produtos Personalizados</h3><p>Experiência de compra pensada para valorizar produtos e simplificar pedidos.</p><b>Ver case completo <i class="fa-solid fa-arrow-up-right-from-square"></i></b></a><a class="p20-case-card" href="https://www.behance.net/gallery/252572629/Landing-Page-Nutricionista-Clinica-e-Comportamental" target="_blank" rel="noopener"><img src="assets/img/behance/carla-medeiros.png" alt="Landing page nutricionista clínica e comportamental" loading="lazy"><span>Landing Page</span><h3>Landing Page Nutricionista Clínica e Comportamental</h3><p>Página criada para apresentar a proposta profissional e orientar novos atendimentos.</p><b>Ver case completo <i class="fa-solid fa-arrow-up-right-from-square"></i></b></a><a class="p20-case-card" href="https://www.behance.net/gallery/252474619/Landing-Page-Premium-Esttica" target="_blank" rel="noopener"><img src="assets/img/behance/or-estetica.png" alt="Landing page premium para estética" loading="lazy"><span>Landing Page</span><h3>Landing Page Premium — Estética</h3><p>Uma presença digital premium para apresentar procedimentos e facilitar o contato.</p><b>Ver case completo <i class="fa-solid fa-arrow-up-right-from-square"></i></b></a><a class="p20-case-card" href="https://www.behance.net/gallery/252461949/ZC-Fotografa-Landing-Page" target="_blank" rel="noopener"><img src="assets/img/behance/casamentos.png" alt="Landing page para fotógrafa de casamentos" loading="lazy"><span>Landing Page</span><h3>ZC Fotógrafa — Landing Page</h3><p>Projeto visual para reunir portfólio, serviços e pedidos de orçamento.</p><b>Ver case completo <i class="fa-solid fa-arrow-up-right-from-square"></i></b></a></div><button class="p20-case-arrow p20-case-next" type="button" aria-label="Ver próximos projetos"><i class="fa-solid fa-arrow-right"></i></button></div><div class="p20-cases-cta p20-reveal"><div><p>Seu negócio pode ser o próximo.</p><span>Escolha uma das vagas do Projeto 20 e transforme sua presença digital em uma página feita para converter.</span></div><a class="p20-button p20-whatsapp" data-message="Olá, Mireva! Quero participar do Projeto 20." href="#vagas">Quero participar do Projeto 20 <i class="fa-brands fa-whatsapp"></i></a></div><a class="p20-behance-link" href="https://www.behance.net/mireva" target="_blank" rel="noopener">Ver todos os projetos no Behance <i class="fa-solid fa-arrow-up-right-from-square"></i></a></div></section>
+
+    <section class="p20-final p20-section" id="vagas"><div class="p20-closing p20-shell p20-reveal"><p>20 empresas. Uma condição especial. <em>Seu negócio pode ser um deles.</em></p><div class="p20-closing-card"><div><span>Projeto 20</span><strong>R$340</strong><small>Domínio por 12 meses incluso · Sem mensalidade</small></div><div class="p20-closing-status"><b><span data-vacancies>20</span> vagas restantes</b><div class="p20-progress"><span data-progress></span></div><small><span data-filled>0</span> de 20 vagas preenchidas</small></div><a class="p20-button p20-whatsapp" data-message="Olá, Mireva! Quero participar do Projeto 20." href="#inicio">Quero participar <i class="fa-brands fa-whatsapp"></i></a></div></div></section>
+    <section class="p20-faq-last p20-section"><div class="p20-shell p20-faq-last-grid"><div class="p20-section-heading p20-reveal"><p class="p20-eyebrow">Dúvidas frequentes</p><h2>Antes de participar, <em>tire suas dúvidas.</em></h2><p>Transparência para que sua empresa decida com segurança.</p></div><div class="p20-faq p20-reveal" style="--delay:.12s"><details><summary>O domínio está incluso?<i>+</i></summary><p>Sim. O registro do domínio está incluso por 12 meses.</p></details><details><summary>Tem mensalidade?<i>+</i></summary><p>Não existe mensalidade obrigatória.</p></details><details><summary>Posso usar meu domínio atual?<i>+</i></summary><p>Sim. Adaptamos a publicação para o domínio que sua empresa já utiliza.</p></details><details><summary>Consigo escolher minhas cores?<i>+</i></summary><p>Sim. O modelo será adaptado à identidade da sua empresa.</p></details><details><summary>Funciona no celular?<i>+</i></summary><p>Sim. Todo o Projeto 20 é desenvolvido com prioridade para smartphones.</p></details><details><summary>Posso pedir alterações?<i>+</i></summary><p>Está incluída uma rodada de ajustes após a primeira versão.</p></details></div></div></section>
+  </main>
+  <a class="p20-mobile-cta p20-whatsapp" data-message="Olá, Mireva! Quero garantir uma das vagas do Projeto 20." href="#vagas"><span>Quero uma vaga</span><i class="fa-brands fa-whatsapp"></i></a>
+  <footer class="p20-footer"><img src="assets/img/logo-branca.png" alt="Mireva"><span>© 2026 Mireva Design & Sistemas</span></footer>
+  <script src="script.js?v=2"></script>
+</body>
+</html>
