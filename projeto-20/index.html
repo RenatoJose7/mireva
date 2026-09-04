@@ -12,23 +12,12 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
   <link rel="stylesheet" href="style.css?v=7">
-  <style>
-    /* Mantido aqui para o preview sempre renderizar os modelos como seções completas. */
-    .p20-model-grid{display:grid;grid-template-columns:1fr;overflow:visible;gap:25px;margin-top:57px;padding:0;scroll-snap-type:none}
-    .p20-model{display:grid;grid-template-columns:minmax(330px,.92fr) 1.08fr;grid-template-areas:"top top" "phone info";align-items:stretch;flex:none;width:100%;border-radius:18px;scroll-snap-align:none}
-    .p20-model:nth-child(even){grid-template-areas:"top top" "info phone"}
-    .p20-model-top{grid-area:top;padding:19px 23px;border-bottom:1px solid #e4e2eb}.p20-model-phone{grid-area:phone;height:440px}.p20-model-phone .p20-phone{transform:translateY(42px) scale(1.12)}
-    .p20-model-info{grid-area:info;display:flex;flex-direction:column;justify-content:center;padding:48px clamp(30px,6vw,82px)}.p20-model-info h3{font-size:clamp(2.7rem,5vw,4.4rem)}
-    .p20-model-info>p{max-width:425px;min-height:0;font-size:.9rem;line-height:1.7;margin:15px 0 25px}.p20-model-info ul{max-width:430px;grid-template-columns:repeat(3,1fr);gap:8px 13px;font-size:.67rem}.p20-model-cta{max-width:430px;margin-top:28px;font-size:.78rem}
-    @media(max-width:780px){.p20-model-grid{margin:40px 0 0;gap:17px}.p20-model,.p20-model:nth-child(even){grid-template-columns:1fr;grid-template-areas:"top" "phone" "info"}.p20-model-phone{height:330px}.p20-model-phone .p20-phone{transform:translateY(28px)}.p20-model-info{padding:29px 22px 25px}.p20-model-info h3{font-size:3rem}.p20-model-info>p{font-size:.8rem;margin:11px 0 19px}.p20-model-info ul{grid-template-columns:repeat(2,1fr);font-size:.62rem}.p20-model-cta{margin-top:21px}}
-  </style>
 </head>
 <body>
   <div class="p20-grain" aria-hidden="true"></div>
   <header class="p20-header">
     <a class="p20-brand" href="#inicio" aria-label="Projeto 20, início">
       <img src="assets/img/logo-branca.png" alt="Mireva">
-      <span>MIREVA</span>
     </a>
     <span class="p20-header-project">Projeto <i>20</i></span>
     <a class="p20-header-cta p20-whatsapp" data-message="Olá, Mireva! Quero saber mais sobre o Projeto 20." href="#vagas">Participar <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
@@ -36,6 +25,7 @@
 
   <main>
     <section class="p20-hero" id="inicio">
+      <canvas class="p20-hero-particles" aria-hidden="true"></canvas>
       <div class="p20-shell p20-hero-grid">
         <div class="p20-hero-copy p20-reveal">
           <p class="p20-kicker"><span></span> PROJETO 20 <b>•</b> SETEMBRO</p>
@@ -49,28 +39,6 @@
           <a class="p20-button p20-whatsapp" data-message="Olá, Mireva! Quero garantir uma das vagas do Projeto 20." href="#vagas">Quero uma das 20 vagas <i class="fa-brands fa-whatsapp"></i></a>
           <ul class="p20-points"><li>Domínio por 12 meses</li><li>Até 6 seções</li><li>WhatsApp integrado</li><li>Sem mensalidade</li></ul>
         </div>
-        <div class="p20-hero-art p20-reveal" style="--delay:.14s" aria-label="Prévia de uma landing page Mireva">
-          <div class="p20-orbit p20-orbit-a"></div><div class="p20-orbit p20-orbit-b"></div>
-          <div class="p20-phone p20-phone-hero">
-            <div class="p20-phone-bar"></div>
-            <div class="p20-screen p20-demo-atlas">
-              <div class="p20-demo-brand">NORT<br>ENERGIA</div><div class="p20-demo-line wide"></div><div class="p20-demo-line"></div><div class="p20-demo-action">SOLICITAR ORÇAMENTO</div><div class="p20-demo-photo"></div><div class="p20-demo-title">Energia que<br>move negócios.</div><div class="p20-demo-blocks"><i></i><i></i><i></i></div>
-            </div>
-          </div>
-          <div class="p20-price-sticker"><small>a partir de</small><strong>R$340</strong><span>domínio incluso</span></div>
-          <div class="p20-art-caption"><span></span> Personalizado para sua empresa</div>
-        </div>
-      </div>
-    </section>
-
-    <section class="p20-video p20-section">
-      <div class="p20-shell p20-center p20-reveal">
-        <p class="p20-eyebrow">Em poucos segundos</p>
-        <h2>Entenda o Projeto 20 <em>em menos de 1 minuto.</em></h2>
-        <div class="p20-video-frame" role="img" aria-label="Espaço reservado para o vídeo do Projeto 20">
-          <div class="p20-video-glow"></div><span class="p20-video-label">Vídeo em breve</span><button class="p20-play" type="button" aria-label="Vídeo do Projeto 20 em breve"><i class="fa-solid fa-play"></i></button><div class="p20-video-copy"><span>Projeto</span><b>20</b></div>
-        </div>
-        <p class="p20-video-foot">Você escolhe o modelo. Nós transformamos em um site com a identidade da sua empresa.</p>
       </div>
     </section>
 
@@ -80,17 +48,17 @@
         <div class="p20-model-grid">
           <article class="p20-model p20-model-atlas p20-reveal">
             <div class="p20-model-top"><span class="p20-model-number">01</span><span class="p20-model-tag">SERVIÇOS</span></div>
-            <div class="p20-model-phone"><div class="p20-laptop"><span class="p20-laptop-camera" aria-hidden="true"></span><div class="p20-laptop-screen"><video class="p20-atlas-video" autoplay muted loop playsinline controls preload="metadata" aria-label="Vídeo de demonstração da landing page Atlas"><source src="assets/videos/atlas-preview-optimized.mp4" type="video/mp4">Seu navegador não suporta vídeo.</video></div></div></div>
+            <div class="p20-model-phone"><div class="p20-laptop"><span class="p20-laptop-camera" aria-hidden="true"></span><div class="p20-laptop-screen"><video class="p20-atlas-video" muted loop playsinline controls preload="metadata" aria-label="Vídeo de demonstração da landing page Atlas"><source src="assets/videos/atlas-preview-optimized.mp4" type="video/mp4">Seu navegador não suporta vídeo.</video></div></div></div>
             <div class="p20-model-info"><span class="p20-model-preview"><i class="fa-solid fa-play"></i> Vídeo do modelo</span><h3>Atlas</h3><p>Direto, comercial e pensado para transformar visitas em pedidos de orçamento.</p><p class="p20-model-for">Para serviços, manutenção, construção, climatização e empresas comerciais.</p><ul><li>Hero</li><li>Serviços</li><li>Diferenciais</li><li>Projetos</li><li>Avaliações</li><li>Contato</li></ul><a class="p20-model-cta p20-whatsapp" data-message="Olá, Mireva! Quero o modelo Atlas no Projeto 20." href="#vagas">Quero o Atlas <i class="fa-solid fa-arrow-right"></i></a></div>
           </article>
           <article class="p20-model p20-model-aura p20-reveal" style="--delay:.1s">
             <div class="p20-model-top"><span class="p20-model-number">02</span><span class="p20-model-tag">BEM-ESTAR</span></div>
-            <div class="p20-model-phone"><div class="p20-phone"><div class="p20-phone-bar"></div><div class="p20-screen p20-demo-aura"><div class="p20-demo-brand">CLÍNICA<br>ORIGEM</div><div class="p20-aura-flower">✦</div><div class="p20-aura-title">Cuidar de você<br>é essencial.</div><div class="p20-aura-button">AGENDAR</div><div class="p20-aura-image"></div><div class="p20-aura-cards"><i></i><i></i></div></div></div></div>
+            <div class="p20-model-phone"><div class="p20-laptop"><span class="p20-laptop-camera" aria-hidden="true"></span><div class="p20-laptop-screen"><video class="p20-aura-video" muted loop playsinline controls preload="metadata" aria-label="Vídeo de demonstração da landing page Aura"><source src="assets/videos/aura-preview-optimized.mp4" type="video/mp4">Seu navegador não suporta vídeo.</video></div></div></div>
             <div class="p20-model-info"><span class="p20-model-preview"><i class="fa-solid fa-play"></i> Prévia animada</span><h3>Aura</h3><p>Elegante, leve e criado para apresentar serviços e transmitir confiança.</p><p class="p20-model-for">Para clínicas, saúde, estética, psicologia e profissionais liberais.</p><ul><li>Hero</li><li>Sobre</li><li>Especialidades</li><li>Diferenciais</li><li>Depoimentos</li><li>Agendamento</li></ul><a class="p20-model-cta p20-whatsapp" data-message="Olá, Mireva! Quero o modelo Aura no Projeto 20." href="#vagas">Quero o Aura <i class="fa-solid fa-arrow-right"></i></a></div>
           </article>
           <article class="p20-model p20-model-nexo p20-reveal" style="--delay:.2s">
             <div class="p20-model-top"><span class="p20-model-number">03</span><span class="p20-model-tag">CORPORATIVO</span></div>
-            <div class="p20-model-phone"><div class="p20-phone"><div class="p20-phone-bar"></div><div class="p20-screen p20-demo-nexo"><div class="p20-demo-brand">NEXUS<br>ARQUITETURA</div><div class="p20-nexo-title">Espaços que<br>fazem sentido.</div><div class="p20-nexo-number">01 — 24</div><div class="p20-nexo-image"></div><div class="p20-nexo-links">PROJETOS &nbsp; SOBRE &nbsp; CONTATO</div><div class="p20-nexo-band"></div></div></div></div>
+            <div class="p20-model-phone"><div class="p20-laptop"><span class="p20-laptop-camera" aria-hidden="true"></span><div class="p20-laptop-screen"><video class="p20-nexo-video" muted loop playsinline controls preload="metadata" aria-label="Vídeo de demonstração da landing page Nexo"><source src="assets/videos/nexo-preview-optimized.mp4" type="video/mp4">Seu navegador não suporta vídeo.</video></div></div></div>
             <div class="p20-model-info"><span class="p20-model-preview"><i class="fa-solid fa-play"></i> Prévia animada</span><h3>Nexo</h3><p>Uma estrutura corporativa para empresas que precisam transmitir autoridade.</p><p class="p20-model-for">Para consultorias, arquitetura, imobiliárias e empresas B2B.</p><ul><li>Hero</li><li>Empresa</li><li>Soluções</li><li>Diferenciais</li><li>Cases</li><li>Orçamento</li></ul><a class="p20-model-cta p20-whatsapp" data-message="Olá, Mireva! Quero o modelo Nexo no Projeto 20." href="#vagas">Quero o Nexo <i class="fa-solid fa-arrow-right"></i></a></div>
           </article>
         </div>
@@ -109,7 +77,7 @@
     <section class="p20-faq-last p20-section"><div class="p20-shell p20-faq-last-grid"><div class="p20-section-heading p20-reveal"><p class="p20-eyebrow">Dúvidas frequentes</p><h2>Antes de participar, <em>tire suas dúvidas.</em></h2><p>Transparência para que sua empresa decida com segurança.</p></div><div class="p20-faq p20-reveal" style="--delay:.12s"><details><summary>O domínio está incluso?<i>+</i></summary><p>Sim. O registro do domínio está incluso por 12 meses.</p></details><details><summary>Tem mensalidade?<i>+</i></summary><p>Não existe mensalidade obrigatória.</p></details><details><summary>Posso usar meu domínio atual?<i>+</i></summary><p>Sim. Adaptamos a publicação para o domínio que sua empresa já utiliza.</p></details><details><summary>Consigo escolher minhas cores?<i>+</i></summary><p>Sim. O modelo será adaptado à identidade da sua empresa.</p></details><details><summary>Funciona no celular?<i>+</i></summary><p>Sim. Todo o Projeto 20 é desenvolvido com prioridade para smartphones.</p></details><details><summary>Posso pedir alterações?<i>+</i></summary><p>Está incluída uma rodada de ajustes após a primeira versão.</p></details></div></div></section>
   </main>
   <a class="p20-mobile-cta p20-whatsapp" data-message="Olá, Mireva! Quero garantir uma das vagas do Projeto 20." href="#vagas"><span>Quero uma vaga</span><i class="fa-brands fa-whatsapp"></i></a>
-  <footer class="p20-footer"><img src="assets/img/logo-branca.png" alt="Mireva"><span>© 2026 Mireva Design & Sistemas</span></footer>
+  <footer class="p20-footer"><img src="assets/img/logo-branca.png" alt="Mireva"><span>© 2026 Mireva Design & Sistemas</span><a class="p20-footer-top" href="#inicio">Voltar ao topo <i class="fa-solid fa-arrow-up" aria-hidden="true"></i></a></footer>
   <script src="script.js?v=2"></script>
 </body>
 </html>
