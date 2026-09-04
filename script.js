@@ -186,7 +186,7 @@ if (form) {
 
     // O evento só acontece depois de o formulário obrigatório estar válido.
     trackMetaEvent('Lead');
-    window.open(`https://wa.me/5511918417189?text=${encodeURIComponent(text)}`, '_blank');
+    window.open(`https://wa.me/5511918427189?text=${encodeURIComponent(text)}`, '_blank');
 
     const success = form.querySelector('.contact-success');
     if (success) {

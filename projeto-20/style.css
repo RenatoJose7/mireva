@@ -1,6 +1,7 @@
 @font-face{font-family:Griffiths;src:url('assets/fonts/Griffiths.otf') format('opentype');font-display:swap}
 .p20-header-project i,.p20-hero h1 em,.p20-section h2 em,.p20-closing em,.p20-video-copy span{-webkit-text-stroke:.6px currentColor}
 .p20-hero h1{font-weight:600}
+.p20-header .p20-header-project{font-size:.98rem}@media(max-width:780px){.p20-header .p20-header-project{font-size:.78rem}}
 
 .p20-project-note{display:flex;align-items:flex-start;gap:9px;max-width:760px;margin:21px 0 28px;color:var(--p20-muted);font-size:.72rem;line-height:1.55}.p20-project-note i{margin-top:3px;color:var(--p20-blue)}@media(max-width:780px){.p20-project-note{font-size:.67rem;margin:18px 0 23px}}
 
