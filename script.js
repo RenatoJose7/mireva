@@ -4,9 +4,11 @@
 
 // ===== HEADER SCROLL =====
 const header = document.getElementById('header');
+const heroSection = document.getElementById('inicio');
 let headerTicking = false;
 const updateHeaderState = () => {
-  header?.classList.toggle('scrolled', window.scrollY > 60);
+  const heroExit = heroSection ? heroSection.offsetTop + heroSection.offsetHeight - 92 : 60;
+  header?.classList.toggle('scrolled', window.scrollY > heroExit);
   headerTicking = false;
 };
 window.addEventListener('scroll', () => {
@@ -39,6 +41,8 @@ if (menuBtn && nav) {
     nav.classList.toggle('active');
     const spans = menuBtn.querySelectorAll('span');
     const isOpen = nav.classList.contains('active');
+    menuBtn.setAttribute('aria-expanded', String(isOpen));
+    menuBtn.setAttribute('aria-label', isOpen ? 'Fechar menu' : 'Abrir menu');
     if (spans[0]) spans[0].style.transform = isOpen ? 'rotate(45deg) translate(5px, 5px)'  : '';
     if (spans[1]) spans[1].style.opacity   = isOpen ? '0' : '1';
     if (spans[2]) spans[2].style.transform = isOpen ? 'rotate(-45deg) translate(5px, -5px)' : '';
@@ -48,6 +52,8 @@ if (menuBtn && nav) {
   nav.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', () => {
       nav.classList.remove('active');
+      menuBtn.setAttribute('aria-expanded', 'false');
+      menuBtn.setAttribute('aria-label', 'Abrir menu');
       menuBtn.querySelectorAll('span').forEach(s => { s.style.transform = ''; s.style.opacity = '1'; });
     });
   });
@@ -284,7 +290,68 @@ function initDashboardSimulation() {
 window.addEventListener('load', initDashboardSimulation, { once: true });
 
 // ===== HERO =====
-// Laptop animado somente por CSS para evitar conflito de transform/JS.
+// Palavra dinâmica com digitação, apagamento e parallax discreto dos projetos.
+function initPremiumHero() {
+  const word = document.querySelector('.hero-word');
+  const projects = document.querySelector('.hero-projects');
+  const cards = [...document.querySelectorAll('.project-card')];
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  if (word && !reducedMotion.matches) {
+    const words = ['construir.', 'transformar.', 'escalar.'];
+    const wait = duration => new Promise(resolve => window.setTimeout(resolve, duration));
+    const type = async value => {
+      for (let character = 1; character <= value.length; character++) {
+        word.textContent = value.slice(0, character);
+        await wait(92);
+      }
+    };
+    const erase = async () => {
+      for (let character = word.textContent.length - 1; character >= 0; character--) {
+        word.textContent = word.textContent.slice(0, character);
+        await wait(52);
+      }
+    };
+    const cycleWords = async () => {
+      let index = 0;
+      word.textContent = '';
+      while (true) {
+        await type(words[index]);
+        await wait(1650);
+        await erase();
+        await wait(360);
+        index = (index + 1) % words.length;
+      }
+    };
+    cycleWords();
+  }
+
+  if (!projects || !cards.length || !window.matchMedia('(hover: hover) and (pointer: fine)').matches || reducedMotion.matches) return;
+
+  let frame = 0;
+  projects.addEventListener('pointermove', event => {
+    const bounds = projects.getBoundingClientRect();
+    const x = (event.clientX - bounds.left) / bounds.width - .5;
+    const y = (event.clientY - bounds.top) / bounds.height - .5;
+    if (frame) return;
+    frame = window.requestAnimationFrame(() => {
+      cards.forEach((card, index) => {
+        const amount = [.55, .8, 1, .72, .5][index];
+        card.style.setProperty('--pointer-x', `${x * amount * 15}px`);
+        card.style.setProperty('--pointer-y', `${y * amount * 11}px`);
+      });
+      frame = 0;
+    });
+  });
+
+  projects.addEventListener('pointerleave', () => {
+    cards.forEach(card => {
+      card.style.setProperty('--pointer-x', '0px');
+      card.style.setProperty('--pointer-y', '0px');
+    });
+  });
+}
+initPremiumHero();
 
 // ===== CARROSSEL DE CASES DO BEHANCE =====
 function initBehanceCarousel() {
