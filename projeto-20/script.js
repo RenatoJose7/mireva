@@ -1,5 +1,4 @@
-/* Atualize apenas este número conforme as vagas forem preenchidas. */
-const PROJECT_20_CONFIG = { totalVacancies: 20, filledVacancies: 16, whatsapp: '5511918427189' };
+const PROJECT_20_CONFIG = window.PROJECT_20_CONFIG;
 
 const remaining = Math.max(0, PROJECT_20_CONFIG.totalVacancies - PROJECT_20_CONFIG.filledVacancies);
 document.querySelectorAll('[data-vacancies]').forEach(el => el.textContent = remaining);

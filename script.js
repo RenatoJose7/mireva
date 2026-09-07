@@ -5,11 +5,15 @@
 // ===== HEADER SCROLL =====
 const header = document.getElementById('header');
 const heroSection = document.getElementById('inicio');
+let heroExit = 60;
 let headerTicking = false;
 const updateHeaderState = () => {
-  const heroExit = heroSection ? heroSection.offsetTop + heroSection.offsetHeight - 92 : 60;
   header?.classList.toggle('scrolled', window.scrollY > heroExit);
   headerTicking = false;
+};
+const measureHeroExit = () => {
+  heroExit = heroSection ? heroSection.offsetTop + heroSection.offsetHeight - 92 : 60;
+  updateHeaderState();
 };
 window.addEventListener('scroll', () => {
   if (!headerTicking) {
@@ -17,7 +21,16 @@ window.addEventListener('scroll', () => {
     headerTicking = true;
   }
 }, { passive: true });
-updateHeaderState();
+let headerResizeFrame = 0;
+window.addEventListener('resize', () => {
+  if (headerResizeFrame) return;
+  headerResizeFrame = window.requestAnimationFrame(() => {
+    measureHeroExit();
+    headerResizeFrame = 0;
+  });
+}, { passive: true });
+window.addEventListener('load', measureHeroExit, { once: true });
+measureHeroExit();
 
 // ===== META PIXEL — CONTATOS =====
 // Registra intenção de contato apenas nos links que levam ao WhatsApp.
@@ -94,6 +107,7 @@ if (counters.length) {
       if (entry.isIntersecting && !entry.target.classList.contains('animated')) {
         entry.target.classList.add('animated');
         animateCounter(entry.target);
+        counterObserver.unobserve(entry.target);
       }
     });
   }, { threshold: 0.5 });
@@ -169,8 +183,13 @@ function setupPortfolioVisibility() {
 
 setupPortfolioVisibility();
 window.addEventListener('load', setupPortfolioLoop, { once: true });
+let portfolioResizeFrame = 0;
 window.addEventListener('resize', () => {
-  window.requestAnimationFrame(setupPortfolioLoop);
+  if (portfolioResizeFrame) return;
+  portfolioResizeFrame = window.requestAnimationFrame(() => {
+    setupPortfolioLoop();
+    portfolioResizeFrame = 0;
+  });
 }, { passive: true });
 
 // ===== FORMULÁRIO → WHATSAPP =====
@@ -196,7 +215,7 @@ if (form) {
 
     const success = form.querySelector('.contact-success');
     if (success) {
-      success.textContent = '✅ Mensagem enviada! Você será redirecionado ao WhatsApp.';
+      success.textContent = '✅ Tudo pronto! Conclua o envio da mensagem pelo WhatsApp.';
       setTimeout(() => { success.textContent = ''; }, 5000);
     }
     form.reset();
@@ -206,88 +225,19 @@ if (form) {
 // ===== BACK TO TOP =====
 const backToTop = document.getElementById('backToTop');
 if (backToTop) {
+  let backToTopTicking = false;
   window.addEventListener('scroll', () => {
-    backToTop.classList.toggle('show', window.scrollY > 500);
-  });
+    if (backToTopTicking) return;
+    backToTopTicking = true;
+    window.requestAnimationFrame(() => {
+      backToTop.classList.toggle('show', window.scrollY > 500);
+      backToTopTicking = false;
+    });
+  }, { passive: true });
   backToTop.addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 }
-
-// ===== DASHBOARD SIMULATION =====
-// Otimizado: a simulação só roda enquanto a seção da agenda está visível.
-function initDashboardSimulation() {
-  const bookingList = document.getElementById('dashboard-booking-list');
-  const countBadge  = document.getElementById('dashboard-booking-count');
-  const agendaSection = document.getElementById('agenda');
-  if (!bookingList || !countBadge || !agendaSection) return;
-
-  let count = 14;
-  let idx = 0;
-  let timer = null;
-  const bookings = [
-    { time: '14:15', name: 'Gabriel Santos',    service: 'Avaliação Capilar',  badge: 'Pendente',   cls: 'badge-pending'  },
-    { time: '15:00', name: 'Letícia Ribeiro',   service: 'Coloração + Escova', badge: 'Confirmado', cls: 'badge-success'  },
-    { time: '16:30', name: 'Thiago Oliveira',   service: 'Corte Masculino',    badge: 'Confirmado', cls: 'badge-success'  },
-    { time: '17:45', name: 'Beatriz Sousa',     service: 'Design de Cílios',   badge: 'Pendente',   cls: 'badge-pending'  },
-  ];
-
-  const tick = () => {
-    const d = bookings[idx];
-    count++;
-    countBadge.textContent = count;
-    countBadge.style.transition = 'transform .25s ease';
-    countBadge.style.transform  = 'scale(1.12)';
-    setTimeout(() => { countBadge.style.transform = 'scale(1)'; }, 260);
-
-    const item = document.createElement('div');
-    item.className = 'booking-item';
-    item.style.cssText = 'opacity:0;transform:translate3d(0,12px,0);transition:opacity .32s ease, transform .32s ease';
-    item.innerHTML = `
-      <div class="booking-time">${d.time}</div>
-      <div class="booking-info">
-        <span class="booking-name">${d.name}</span>
-        <span class="booking-service">${d.service}</span>
-      </div>
-      <span class="badge ${d.cls}">${d.badge}</span>
-    `;
-    bookingList.insertBefore(item, bookingList.firstChild);
-    requestAnimationFrame(() => {
-      item.style.opacity = '1';
-      item.style.transform = 'translate3d(0,0,0)';
-    });
-
-    const items = bookingList.querySelectorAll('.booking-item');
-    if (items.length > 3) {
-      const last = items[items.length - 1];
-      last.style.opacity = '0';
-      last.style.transform = 'translate3d(0,-8px,0)';
-      setTimeout(() => last.remove(), 340);
-    }
-
-    idx = (idx + 1) % bookings.length;
-  };
-
-  const start = () => {
-    if (timer || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    timer = setInterval(tick, 5500);
-  };
-  const stop = () => {
-    if (!timer) return;
-    clearInterval(timer);
-    timer = null;
-  };
-
-  if ('IntersectionObserver' in window) {
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => entry.isIntersecting ? start() : stop());
-    }, { threshold: 0.18 });
-    observer.observe(agendaSection);
-  } else {
-    start();
-  }
-}
-window.addEventListener('load', initDashboardSimulation, { once: true });
 
 // ===== HERO =====
 // Palavra dinâmica com digitação, apagamento e parallax discreto dos projetos.
@@ -329,12 +279,16 @@ function initPremiumHero() {
   if (!projects || !cards.length || !window.matchMedia('(hover: hover) and (pointer: fine)').matches || reducedMotion.matches) return;
 
   let frame = 0;
+  let pointerClientX = 0;
+  let pointerClientY = 0;
   projects.addEventListener('pointermove', event => {
-    const bounds = projects.getBoundingClientRect();
-    const x = (event.clientX - bounds.left) / bounds.width - .5;
-    const y = (event.clientY - bounds.top) / bounds.height - .5;
+    pointerClientX = event.clientX;
+    pointerClientY = event.clientY;
     if (frame) return;
     frame = window.requestAnimationFrame(() => {
+      const bounds = projects.getBoundingClientRect();
+      const x = (pointerClientX - bounds.left) / bounds.width - .5;
+      const y = (pointerClientY - bounds.top) / bounds.height - .5;
       cards.forEach((card, index) => {
         const amount = [.55, .8, 1, .72, .5][index];
         card.style.setProperty('--pointer-x', `${x * amount * 15}px`);
@@ -352,6 +306,32 @@ function initPremiumHero() {
   });
 }
 initPremiumHero();
+
+// ===== STATUS DO PROJETO 20 =====
+function initProject20Status() {
+  const config = window.PROJECT_20_CONFIG;
+  if (!config) return;
+
+  const total = Math.max(0, Number(config.totalVacancies) || 0);
+  const filled = Math.min(total, Math.max(0, Number(config.filledVacancies) || 0));
+  const remaining = total - filled;
+  const progress = total ? (filled / total) * 100 : 0;
+
+  document.querySelectorAll('[data-p20-vacancies]').forEach(element => { element.textContent = remaining; });
+  document.querySelectorAll('[data-p20-filled]').forEach(element => { element.textContent = filled; });
+  document.querySelectorAll('[data-p20-total]').forEach(element => { element.textContent = total; });
+  document.querySelectorAll('[data-p20-progress]').forEach(element => { element.style.width = `${progress}%`; });
+  document.querySelectorAll('[data-p20-whatsapp]').forEach(element => {
+    const message = element.dataset.message || 'Olá, Mireva! Quero saber mais sobre o Projeto 20.';
+    element.href = `https://wa.me/${config.whatsapp}?text=${encodeURIComponent(message)}`;
+  });
+  document.querySelectorAll('.project20-progress[role="progressbar"]').forEach(element => {
+    element.setAttribute('aria-valuemax', total);
+    element.setAttribute('aria-valuenow', filled);
+    element.setAttribute('aria-label', `${filled} de ${total} vagas preenchidas`);
+  });
+}
+initProject20Status();
 
 // ===== CARROSSEL DE CASES DO BEHANCE =====
 function initBehanceCarousel() {
