@@ -21,7 +21,7 @@ const modelVideoObserver = new IntersectionObserver(entries => entries.forEach(e
   if (entry.isIntersecting) video.play().catch(() => {});
   else video.pause();
 }), { threshold: .2 });
-document.querySelectorAll('.p20-model video').forEach(video => modelVideoObserver.observe(video));
+document.querySelectorAll('.p20-model video, .p20-plan-slide video, .p20-pro-page video').forEach(video => modelVideoObserver.observe(video));
 
 const hero = document.querySelector('.p20-hero');
 const particleCanvas = document.querySelector('.p20-hero-particles');
@@ -141,4 +141,28 @@ if (caseCarousel) {
   const moveCases = direction => caseCarousel.scrollBy({ left: direction * Math.min(caseCarousel.clientWidth * .82, 382), behavior: 'smooth' });
   document.querySelector('.p20-case-prev')?.addEventListener('click', () => moveCases(-1));
   document.querySelector('.p20-case-next')?.addEventListener('click', () => moveCases(1));
+}
+
+const planCarousel = document.getElementById('p20PlanCarousel');
+if (planCarousel) {
+  const planSlides = Array.from(planCarousel.children);
+  const planDots = Array.from(document.querySelectorAll('.p20-plan-dots button'));
+  const updatePlanDots = () => {
+    const closestIndex = planSlides.reduce((closest, slide, index) => (
+      Math.abs(slide.offsetLeft - planCarousel.scrollLeft) < Math.abs(planSlides[closest].offsetLeft - planCarousel.scrollLeft) ? index : closest
+    ), 0);
+    planDots.forEach((dot, index) => dot.classList.toggle('is-active', index === closestIndex));
+  };
+  const movePlan = direction => {
+    const current = planSlides.reduce((closest, slide, index) => (
+      Math.abs(slide.offsetLeft - planCarousel.scrollLeft) < Math.abs(planSlides[closest].offsetLeft - planCarousel.scrollLeft) ? index : closest
+    ), 0);
+    const next = Math.max(0, Math.min(planSlides.length - 1, current + direction));
+    planSlides[next]?.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+  };
+  document.querySelector('.p20-plan-prev')?.addEventListener('click', () => movePlan(-1));
+  document.querySelector('.p20-plan-next')?.addEventListener('click', () => movePlan(1));
+  planDots.forEach((dot, index) => dot.addEventListener('click', () => planSlides[index]?.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' })));
+  planCarousel.addEventListener('scroll', updatePlanDots, { passive: true });
+  requestAnimationFrame(updatePlanDots);
 }
