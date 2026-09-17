@@ -3061,6 +3061,18 @@ body { background: #eef1f4 !important; }
   letter-spacing: -.02em;
   line-height: .82;
 }
+.project20-price-prefix {
+  display: block;
+  margin: .28em 0 .08em;
+  color: #83b9dd;
+  font-family: var(--font-body);
+  font-size: .23em;
+  font-style: normal;
+  font-weight: 300;
+  letter-spacing: -.025em;
+  line-height: 1;
+  vertical-align: middle;
+}
 .project20-lead {
   max-width: 590px;
   margin: 0 0 25px;
